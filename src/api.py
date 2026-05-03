@@ -3,6 +3,8 @@ from __future__ import annotations
 import base64
 import io
 import json
+import os
+import urllib.request
 from datetime import datetime
 from pathlib import Path
 
@@ -44,6 +46,35 @@ _model = None
 _detector: LiveDetector | None = None
 _config = None
 _class_names = ["MEL", "NV", "BCC", "AK", "BKL", "DF", "VASC", "SCC", "Healthy"]
+
+
+def _checkpoint_candidates(model_name: str, fold: int) -> list[Path]:
+    out_root = Path(_config.get("data", {}).get("output_dir", "outputs")) if _config else Path("outputs")
+    return [
+        out_root / model_name / f"fold_{fold}" / "best.pth",
+        out_root / model_name / f"fold_{fold}" / "latest.pth",
+        out_root / "models" / model_name / f"fold_{fold}" / "best.pth",
+    ]
+
+
+def _ensure_checkpoint_available(model_name: str, fold: int) -> Path | None:
+    candidates = _checkpoint_candidates(model_name, fold)
+    existing = next((p for p in candidates if p.exists()), None)
+    if existing is not None:
+        return existing
+
+    weights_url = os.environ.get("MODEL_WEIGHTS_URL")
+    if not weights_url:
+        return None
+
+    target = candidates[0]
+    target.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        urllib.request.urlretrieve(weights_url, target)
+        return target if target.exists() else None
+    except Exception as exc:
+        print(f"Weights download failed: {exc}")
+        return None
 
 
 def _load_config(config_path: str = "config.yaml") -> dict:
@@ -120,6 +151,15 @@ async def load_model():
         live_cfg = _config.get("live", {})
         use_ensemble = bool(live_cfg.get("use_ensemble", False))
         fold = int(live_cfg.get("fold", 0))
+
+        if use_ensemble:
+            archs = _config.get("architectures") or ["efficientnet_b3", "inception_v3", "convnext_tiny"]
+            if isinstance(archs, str):
+                archs = [archs]
+            for arch in archs:
+                _ensure_checkpoint_available(str(arch), fold)
+        else:
+            _ensure_checkpoint_available(model_name, fold)
 
         _model = load_runtime_predictor(
             _config,

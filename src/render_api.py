@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import asyncio
 import importlib
+import os
+import urllib.request
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, Request, Response
@@ -28,8 +30,21 @@ def _load_backend_sync() -> None:
     _loading = True
     _error = None
     try:
+        weights_url = os.environ.get("MODEL_WEIGHTS_URL")
+        if weights_url:
+            try:
+                urllib.request.urlopen(weights_url, timeout=20).close()
+            except Exception as exc:
+                raise RuntimeError(f"MODEL_WEIGHTS_URL is not reachable: {exc}") from exc
+
         module = importlib.import_module("src.api")
         module._load_model_sync()
+        model_error = getattr(module, "_model_error", None)
+        if model_error:
+            raise RuntimeError(f"Model failed to load: {model_error}")
+        if getattr(module, "_model", None) is None:
+            raise RuntimeError("Model failed to load for an unknown reason")
+
         _api_module = module
         _api_app = module.app
     except Exception as exc:

@@ -43,6 +43,7 @@ From outputs/efficientnet_b3/fold_4/history.json:
 ## Visuals
 
 ![Loss Curves (All Folds)](docs/assets/loss_curves_all_folds.png)
+![Train/Validation Loss Curve](docs/assets/loss_curve_mae.png)
 ![Confusion Matrix (Final)](docs/assets/confusion_matrix_final.png)
 ![t-SNE Embeddings](docs/assets/tsne_embeddings.png)
 ![Model Comparison](docs/assets/model_comparison.png)

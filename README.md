@@ -42,12 +42,42 @@ From outputs/efficientnet_b3/fold_4/history.json:
 
 ## Visuals
 
-![Loss Curves (All Folds)](docs/assets/loss_curves_all_folds.png)
-![Train/Validation Loss Curve](docs/assets/loss_curve_mae.png)
-![Confusion Matrix (Final)](docs/assets/confusion_matrix_final.png)
-![t-SNE Embeddings](docs/assets/tsne_embeddings.png)
-![Model Comparison](docs/assets/model_comparison.png)
-![Class Distribution](docs/assets/class_distribution_bar.png)
+<div align="center">
+
+<b>Training & Evaluation</b><br>
+<img src="docs/assets/graphs/loss_curves_all_folds.png" alt="Loss Curves (All Folds)" width="400"/>
+<img src="docs/assets/loss_curve_mae.png" alt="Train/Validation Loss Curve" width="400"/>
+<img src="docs/assets/graphs/confusion_matrix_final.png" alt="Confusion Matrix (Final)" width="400"/>
+<img src="docs/assets/graphs/metrics_per_epoch_fold0.png" alt="Metrics per Epoch (Fold 0)" width="400"/>
+
+<b>Feature Analysis</b><br>
+<img src="docs/assets/graphs/tsne_embeddings.png" alt="t-SNE Embeddings" width="400"/>
+<img src="docs/assets/graphs/feature_separability.png" alt="Feature Separability" width="400"/>
+<img src="docs/assets/graphs/texture_heatmap.png" alt="Texture Heatmap" width="400"/>
+<img src="docs/assets/graphs/colour_profile_per_class.png" alt="Colour Profile per Class" width="400"/>
+
+<b>Dataset & Preprocessing</b><br>
+<img src="docs/assets/graphs/class_distribution_bar.png" alt="Class Distribution (Bar)" width="400"/>
+<img src="docs/assets/graphs/class_distribution_pie.png" alt="Class Distribution (Pie)" width="400"/>
+<img src="docs/assets/graphs/image_size_distribution.png" alt="Image Size Distribution" width="400"/>
+<img src="docs/assets/graphs/imbalance_comparison.png" alt="Imbalance Comparison" width="400"/>
+<img src="docs/assets/graphs/sample_grid_per_class.png" alt="Sample Grid per Class" width="400"/>
+<img src="docs/assets/graphs/pipeline_grid.png" alt="Preprocessing Pipeline Grid" width="400"/>
+<img src="docs/assets/graphs/histogram_shift.png" alt="Histogram Shift" width="400"/>
+<img src="docs/assets/graphs/hair_detection_samples.png" alt="Hair Detection Samples" width="400"/>
+<img src="docs/assets/graphs/preprocessing_timing.png" alt="Preprocessing Timing" width="400"/>
+<img src="docs/assets/graphs/preprocessing_samples.png" alt="Preprocessing Samples" width="400"/>
+
+<b>Segmentation & Model Comparison</b><br>
+<img src="docs/assets/graphs/abcd_scatter.png" alt="ABCD Scatter" width="400"/>
+<img src="docs/assets/graphs/lesion_area_per_class.png" alt="Lesion Area per Class" width="400"/>
+<img src="docs/assets/graphs/mask_quality_distribution.png" alt="Mask Quality Distribution" width="400"/>
+<img src="docs/assets/graphs/method_comparison_grid.png" alt="Segmentation Method Comparison" width="400"/>
+<img src="docs/assets/graphs/model_comparison.png" alt="Model Comparison" width="400"/>
+<img src="docs/assets/graphs/dataset_distribution.png" alt="Dataset Distribution" width="400"/>
+<img src="docs/assets/graphs/dataset_distribution_pie.png" alt="Dataset Distribution Pie" width="400"/>
+
+</div>
 
 ## Backend (FastAPI)
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import asyncio
 import base64
 import io
 import json
@@ -46,6 +47,8 @@ _model = None
 _detector: LiveDetector | None = None
 _config = None
 _class_names = ["MEL", "NV", "BCC", "AK", "BKL", "DF", "VASC", "SCC", "Healthy"]
+_model_loading = False
+_model_error: str | None = None
 
 
 def _checkpoint_candidates(model_name: str, fold: int) -> list[Path]:
@@ -142,9 +145,10 @@ def _tail(series: list, max_len: int = 200) -> list:
     return series[-max_len:]
 
 
-@app.on_event("startup")
-async def load_model():
-    global _model, _config, _detector
+def _load_model_sync():
+    global _model, _config, _detector, _model_loading, _model_error
+    _model_loading = True
+    _model_error = None
     try:
         _config = _load_config("config.yaml")
         model_name = str(_config.get("model", "efficientnet_b3"))
@@ -168,15 +172,30 @@ async def load_model():
             fold=fold,
         )
         _detector = LiveDetector(_model, _config)
+        print(f"Model loaded: {model_name} fold {fold}")
     except Exception as e:
         _model = None
         _detector = None
-        print(f"API startup warning: model not loaded ({e})")
+        _model_error = str(e)
+        print(f"API model loading warning: model not loaded ({e})")
+    finally:
+        _model_loading = False
+
+
+@app.on_event("startup")
+async def load_model():
+    asyncio.create_task(asyncio.to_thread(_load_model_sync))
 
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "model_loaded": _model is not None, "classes": 9}
+    return {
+        "status": "ok",
+        "model_loaded": _model is not None,
+        "model_loading": _model_loading,
+        "model_error": _model_error,
+        "classes": 9,
+    }
 
 
 @app.get("/metrics/latest")

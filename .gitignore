@@ -1,0 +1,71 @@
+# Python / Virtualenv
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datasets
+raw/
+data/
+datasets/
+
+# Outputs (keep analysis and plots only)
+outputs/*
+!outputs/analysis/
+!outputs/analysis/**
+!outputs/plots/
+!outputs/plots/**
+
+# Model artifacts
+*.pth
+*.pt
+*.ckpt
+*.onnx
+*.tflite
+*.safetensors
+
+# Logs / experiments
+logs/
+wandb/
+mlruns/
+tensorboard/
+*.log
+
+# Secrets / keys
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+secrets/
+**/secrets/
+**/*secret*
+**/credentials*.json
+**/token*.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Frontend
+node_modules/
+dist/
+dist-ssr/
+*.local

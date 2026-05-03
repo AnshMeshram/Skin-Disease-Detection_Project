@@ -1,0 +1,11 @@
+{
+  "efficientnet_b3": {
+    "accuracy_pct": 75.27089783281734,
+    "balanced_accuracy": 0.7663033502914105,
+    "f1_macro": 0.6862129680305992,
+    "precision_macro": 0.6644172050366449,
+    "recall_macro": 0.7663033502914105,
+    "specificity_macro": 0.9662042766476527,
+    "roc_auc_macro": 0.9152199907702854
+  }
+}

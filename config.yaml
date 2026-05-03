@@ -1,0 +1,80 @@
+seed: 42
+image_size: 192
+batch_size: 32
+epochs: 80
+steps_per_epoch: 1291
+epoch_time_target_sec: 180 # 3 min per epoch
+num_workers: 2
+val_num_workers: 2
+pin_memory: true
+persistent_workers: true
+prefetch_factor: 4
+plateau_patience: 0
+plateau_min_delta: 0.003
+learning_rate: 8.0e-5
+phase1_epochs: 0 # unfreeze from epoch 1 to break plateau
+phase2_backbone_lr: 8.0e-5
+phase2_head_lr: 2.0e-4
+weight_decay: 5.0e-5
+grad_clip: 0.5
+patience: 0
+early_stopping: false
+amp: true
+cudnn_benchmark: true
+folds: 5
+split_strategy: kfold
+split:
+  strategy: kfold
+  train: 0.8
+  val: 0.1
+  test: 0.1
+num_classes: 9
+model: efficientnet_b3
+pretrained: true
+dropout: 0.4
+loss: focal_smooth
+focal_gamma: 2.0
+label_smoothing: 0.15
+use_alpha: true
+cosine_restart: true # CosineAnnealingWarmRestarts — eliminates plateau
+mixup_alpha: 0.2 # Disable mixup to keep train/val metrics directly comparable
+onecycle: true
+onecycle_max_lr: 8.0e-5
+onecycle_pct_start: 0.05
+onecycle_div_factor: 10.0
+onecycle_final_div_factor: 100.0
+resume_from_best: true # Resume from latest checkpoint with optimizer/scheduler state
+rand_erasing_prob: 0.0 # Disable random erasing for stable warm-start fine-tune
+flip_prob: 0.5
+rotation_degrees: 0
+zoom: 0.0
+color_jitter: 0.0
+data:
+  isic_ground_truth: "raw/ISIC_2019_Training_GroundTruth.csv"
+  isic_images_dir: "raw/ISIC_2019_Training_Input"
+  healthy_dir: "raw/HEALTHY"
+  output_dir: "outputs"
+  healthy_limit: 1000
+preprocessing:
+  enabled: true
+  use_preprocessed: true
+  hair_removal: true
+  clahe: true
+  noise_reduction: true
+  segmentation_method: "unet"
+  unet_checkpoint: "outputs/unet/best_unet.pth"
+training:
+  mask_guided_attention: false
+api:
+  host: "0.0.0.0"
+  port: 8080
+live:
+  fold: 0
+  use_ensemble: false
+  confidence_threshold: 0.70
+  hair_removal: true
+  clahe: true
+  gradcam: true
+  gradcam_alpha: 0.35
+monitor:
+  fold: 0

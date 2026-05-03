@@ -2,6 +2,9 @@
   command = "npm run build"
   publish = "dist"
 
+[build.environment]
+  VITE_API_URL = "https://skinai-backend-o4dm.onrender.com"
+
 [dev]
   command = "npm run dev"
   port = 5173

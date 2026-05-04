@@ -28,7 +28,6 @@ export default function Hero({
   const [dragging, setDragging] = useState(false);
   const [genderOpen, setGenderOpen] = useState(false);
   const [isCameraActive, setIsCameraActive] = useState(false);
-  const [isSimulation, setIsSimulation] = useState(false);
   const [zoom, setZoom] = useState(1);
 
   const fileRef = useRef(null);
@@ -39,14 +38,13 @@ export default function Hero({
     if (!f || !f.type.startsWith("image/")) return;
     setFile(f);
     setPreview(URL.createObjectURL(f));
-    setIsCameraActive(false); // Ensure camera closes if image is dropped or uploaded
+    stopCamera();
   };
 
   const reset = () => {
     setFile(null);
     setPreview(null);
     setPatientInfo({ name: "", gender: "", age: "" });
-    setIsSimulation(false);
     setZoom(1);
     stopCamera();
   };
@@ -63,7 +61,6 @@ export default function Hero({
       // Try to get stream first to verify hardware exists
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
       setIsCameraActive(true);
-      setIsSimulation(false);
 
       // Use a slightly longer delay to ensure the video element is mounted in the DOM
       setTimeout(() => {
@@ -73,12 +70,9 @@ export default function Hero({
         }
       }, 100);
     } catch (err) {
-      console.warn(
-        "Camera Error or Missing Hardware. Entering Simulation Mode:",
-        err,
-      );
-      setIsCameraActive(true);
-      setIsSimulation(true);
+      console.warn("Camera access failed:", err);
+      setIsCameraActive(false);
+      alert("Could not open the camera. Check permissions or use Upload File.");
     }
   };
 
@@ -87,25 +81,10 @@ export default function Hero({
       videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
       videoRef.current.srcObject = null;
     }
-    setIsSimulation(false);
     setIsCameraActive(false);
   };
 
   const captureFrame = async () => {
-    if (isSimulation) {
-      try {
-        const res = await fetch("/simulation.jpg");
-        const blob = await res.blob();
-        const f = new File([blob], "simulated_capture.jpg", {
-          type: "image/jpeg",
-        });
-        loadFile(f);
-        return;
-      } catch (e) {
-        console.error("Simulation capture failed", e);
-      }
-    }
-
     if (!videoRef.current || !canvasRef.current) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
@@ -269,57 +248,20 @@ export default function Hero({
           >
             {isCameraActive ? (
               <>
-                {isSimulation ? (
-                  <div
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      position: "relative",
-                    }}
-                  >
-                    <img
-                      src="/simulation.jpg"
-                      alt="Simulated Feed"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        objectFit: "cover",
-                      }}
-                    />
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 12,
-                        left: 12,
-                        background: "#F59E0B",
-                        color: "#fff",
-                        padding: "6px 14px",
-                        borderRadius: 10,
-                        fontSize: "0.7rem",
-                        fontWeight: 900,
-                        boxShadow: "0 4px 10px rgba(245,158,11,0.3)",
-                        letterSpacing: "0.05em",
-                      }}
-                    >
-                      DEMO MODE: SIMULATED FEED
-                    </div>
-                  </div>
-                ) : (
-                  <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
-                    <video 
-                      ref={videoRef} 
-                      autoPlay 
-                      playsInline 
-                      style={{ 
-                        width: '100%', 
-                        height: '100%', 
-                        objectFit: 'cover', 
-                        transform: `scaleX(-1) scale(${zoom})`,
-                        transition: 'transform 0.2s ease-out'
-                      }} 
-                    />
-                  </div>
-                )}
+                <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
+                  <video 
+                    ref={videoRef} 
+                    autoPlay 
+                    playsInline 
+                    style={{ 
+                      width: '100%', 
+                      height: '100%', 
+                      objectFit: 'cover', 
+                      transform: `scaleX(-1) scale(${zoom})`,
+                      transition: 'transform 0.2s ease-out'
+                    }} 
+                  />
+                </div>
                 
                 {/* Zoom Controls Overlay */}
                 <div style={{ 

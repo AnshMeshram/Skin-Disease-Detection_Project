@@ -21,15 +21,9 @@ function ScrollToTop() {
 
 export default function App() {
   const [apiStatus, setApiStatus] = useState("offline");
-  const demoMode = import.meta.env.VITE_DEMO_MODE === "true" || import.meta.env.VITE_API_URL === "demo";
 
   /* ── Poll health every 10 s ─────────────────── */
   useEffect(() => {
-    if (demoMode) {
-      setApiStatus("demo");
-      return undefined;
-    }
-
     const poll = async () => {
       try {
         await checkHealth();
@@ -41,7 +35,7 @@ export default function App() {
     poll();
     const id = setInterval(poll, 10000);
     return () => clearInterval(id);
-  }, [demoMode]);
+  }, []);
 
   return (
     <BrowserRouter>

@@ -59,7 +59,6 @@ Or use Live Server in VS Code.
 - Ensemble model agreement display
 - Model architecture tabs (EfficientNet-B3 / InceptionV3 / ConvNeXt Tiny)
 - 9-class disease grid
-- Demo mode if backend is offline
 - Fully responsive (mobile + desktop)
 
 ## API Response Format

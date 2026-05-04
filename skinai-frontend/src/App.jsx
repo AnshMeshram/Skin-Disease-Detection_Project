@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import './index.css';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import "./index.css";
 
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Home from './pages/Home';
-import Model from './pages/Model';
-import SkinGuide from './pages/SkinGuide';
-import Research from './pages/Research';
-import { checkHealth } from './api';
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Model from "./pages/Model";
+import SkinGuide from "./pages/SkinGuide";
+import Research from "./pages/Research";
+import { checkHealth } from "./api";
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -40,12 +40,17 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <div
+        style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}
+      >
         <Navbar apiStatus={apiStatus} />
-        
+
         <div style={{ flex: 1 }}>
           <Routes>
-            <Route path="/" element={<Home apiOnline={apiStatus === "online"} />} />
+            <Route
+              path="/"
+              element={<Home apiOnline={apiStatus === "online"} />}
+            />
             <Route path="/model" element={<Model />} />
             <Route path="/guide" element={<SkinGuide />} />
             <Route path="/research" element={<Research />} />

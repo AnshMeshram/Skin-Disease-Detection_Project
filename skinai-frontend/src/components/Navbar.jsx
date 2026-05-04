@@ -8,9 +8,11 @@ const TABS = [
   { name: "Research", path: "/research" },
 ];
 
-export default function Navbar({ apiOnline }) {
+export default function Navbar({ apiStatus }) {
   const location = useLocation();
   const isHome = location.pathname === "/";
+  const isDemo = apiStatus === "demo";
+  const isOnline = apiStatus === "online";
 
   // Updated for bright theme compatibility
   const textColor = "#111827";
@@ -143,14 +145,16 @@ export default function Navbar({ apiOnline }) {
             width: 8,
             height: 8,
             borderRadius: "50%",
-            background: apiOnline ? "#10B981" : "#F43F5E",
-            boxShadow: apiOnline
-              ? "0 0 12px rgba(16, 185, 129, 0.6)"
-              : "0 0 12px rgba(244, 63, 94, 0.6)",
+            background: isDemo ? "#F59E0B" : isOnline ? "#10B981" : "#F43F5E",
+            boxShadow: isDemo
+              ? "0 0 12px rgba(245, 158, 11, 0.6)"
+              : isOnline
+                ? "0 0 12px rgba(16, 185, 129, 0.6)"
+                : "0 0 12px rgba(244, 63, 94, 0.6)",
             animation: "pulse 2s infinite",
           }}
         />
-        {apiOnline ? "System Live" : "System Offline"}
+        {isDemo ? "Demo Mode" : isOnline ? "System Live" : "System Offline"}
       </div>
     </nav>
   );

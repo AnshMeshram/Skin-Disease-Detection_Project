@@ -20,32 +20,38 @@ function ScrollToTop() {
 }
 
 export default function App() {
-  const [apiOnline, setApiOnline] = useState(false);
+  const [apiStatus, setApiStatus] = useState("offline");
+  const demoMode = import.meta.env.VITE_DEMO_MODE === "true" || import.meta.env.VITE_API_URL === "demo";
 
   /* ── Poll health every 10 s ─────────────────── */
   useEffect(() => {
+    if (demoMode) {
+      setApiStatus("demo");
+      return undefined;
+    }
+
     const poll = async () => {
-      try { 
-        await checkHealth(); 
-        setApiOnline(true); 
-      } catch { 
-        setApiOnline(false); 
+      try {
+        await checkHealth();
+        setApiStatus("online");
+      } catch {
+        setApiStatus("offline");
       }
     };
     poll();
     const id = setInterval(poll, 10000);
     return () => clearInterval(id);
-  }, []);
+  }, [demoMode]);
 
   return (
     <BrowserRouter>
       <ScrollToTop />
       <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <Navbar apiOnline={apiOnline} />
+        <Navbar apiStatus={apiStatus} />
         
         <div style={{ flex: 1 }}>
           <Routes>
-            <Route path="/" element={<Home apiOnline={apiOnline} />} />
+            <Route path="/" element={<Home apiOnline={apiStatus === "online"} />} />
             <Route path="/model" element={<Model />} />
             <Route path="/guide" element={<SkinGuide />} />
             <Route path="/research" element={<Research />} />

@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  VITE_API_URL = "https://skinai-backend-o4dm.onrender.com"
+  VITE_API_URL = "demo"
 
 [dev]
   command = "npm run dev"

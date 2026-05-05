@@ -52,8 +52,8 @@ export default function Pipeline({ pipelineResult, activeStep, isVisible }) {
   if (!isVisible) return null;
 
   return (
-    <section id="preprocessing" className="reveal visible" ref={ref}
-      style={{ background: '#F8FAFC', padding: '3rem 2rem', animation: 'fadeUp 0.5s ease' }}
+    <section id="preprocessing" className="reveal visible liquid-bg" ref={ref}
+      style={{ padding: '3.5rem 2rem', animation: 'fadeUp 0.5s ease', position: 'relative', overflow: 'hidden' }}
     >
       <div style={{ maxWidth: 900, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>

@@ -88,7 +88,7 @@ export default function Hero({
     if (!videoRef.current || !canvasRef.current) return;
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    
+
     // Calculate cropped dimensions for zoom
     const w = video.videoWidth;
     const h = video.videoHeight;
@@ -99,10 +99,20 @@ export default function Hero({
 
     canvas.width = 640; // Standardize output size
     canvas.height = 480;
-    const ctx = canvas.getContext('2d');
-    
+    const ctx = canvas.getContext("2d");
+
     // Draw the zoomed portion of the video onto the canvas
-    ctx.drawImage(video, startX, startY, zoomW, zoomH, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(
+      video,
+      startX,
+      startY,
+      zoomW,
+      zoomH,
+      0,
+      0,
+      canvas.width,
+      canvas.height,
+    );
 
     canvas.toBlob(
       (blob) => {
@@ -210,11 +220,19 @@ export default function Hero({
           AI-POWERED DERMOSCOPY
         </div>
 
-        <h1 style={{
-          fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800,
-          fontSize: 'clamp(2.2rem, 6vw, 3.8rem)', color: '#111827', lineHeight: 1.15, letterSpacing: '-0.03em',
-        }}>
-          AI Powered Skin<br />Disease Detection
+        <h1
+          style={{
+            fontFamily: "'Plus Jakarta Sans', sans-serif",
+            fontWeight: 800,
+            fontSize: "clamp(2.2rem, 6vw, 3.8rem)",
+            color: "#111827",
+            lineHeight: 1.15,
+            letterSpacing: "-0.03em",
+          }}
+        >
+          AI Powered Skin
+          <br />
+          Disease Detection
         </h1>
 
         {/* Camera/Dropzone Box */}
@@ -248,41 +266,102 @@ export default function Hero({
           >
             {isCameraActive ? (
               <>
-                <div style={{ width: '100%', height: '100%', overflow: 'hidden', position: 'relative' }}>
-                  <video 
-                    ref={videoRef} 
-                    autoPlay 
-                    playsInline 
-                    style={{ 
-                      width: '100%', 
-                      height: '100%', 
-                      objectFit: 'cover', 
+                <div
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
                       transform: `scaleX(-1) scale(${zoom})`,
-                      transition: 'transform 0.2s ease-out'
-                    }} 
+                      transition: "transform 0.2s ease-out",
+                    }}
                   />
                 </div>
-                
+
                 {/* Zoom Controls Overlay */}
-                <div style={{ 
-                  position: 'absolute', right: 20, top: '50%', transform: 'translateY(-50%)',
-                  display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'center',
-                  background: 'rgba(0,0,0,0.4)', padding: '12px 8px', borderRadius: 20, backdropFilter: 'blur(10px)',
-                  zIndex: 30
-                }}>
-                  <button onClick={() => setZoom(prev => Math.min(prev + 0.5, 4))} style={{ background: 'none', border: 'none', color: '#fff', fontWeight: 800, cursor: 'pointer' }}>+</button>
-                  <div style={{ height: 100, display: 'flex', alignItems: 'center' }}>
-                    <input 
-                      type="range" min="1" max="4" step="0.1" value={zoom} 
+                <div
+                  style={{
+                    position: "absolute",
+                    right: 20,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 12,
+                    alignItems: "center",
+                    background: "rgba(0,0,0,0.4)",
+                    padding: "12px 8px",
+                    borderRadius: 20,
+                    backdropFilter: "blur(10px)",
+                    zIndex: 30,
+                  }}
+                >
+                  <button
+                    onClick={() => setZoom((prev) => Math.min(prev + 0.5, 4))}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#fff",
+                      fontWeight: 800,
+                      cursor: "pointer",
+                    }}
+                  >
+                    +
+                  </button>
+                  <div
+                    style={{
+                      height: 100,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <input
+                      type="range"
+                      min="1"
+                      max="4"
+                      step="0.1"
+                      value={zoom}
                       onChange={(e) => setZoom(parseFloat(e.target.value))}
-                      style={{ 
-                        writingMode: 'bt-lr', appearance: 'slider-vertical', 
-                        width: 4, height: '100%', cursor: 'pointer'
+                      style={{
+                        writingMode: "bt-lr",
+                        appearance: "slider-vertical",
+                        width: 4,
+                        height: "100%",
+                        cursor: "pointer",
                       }}
                     />
                   </div>
-                  <button onClick={() => setZoom(prev => Math.max(prev - 0.5, 1))} style={{ background: 'none', border: 'none', color: '#fff', fontWeight: 800, cursor: 'pointer' }}>−</button>
-                  <div style={{ fontSize: '0.6rem', color: '#fff', fontWeight: 800 }}>{zoom.toFixed(1)}x</div>
+                  <button
+                    onClick={() => setZoom((prev) => Math.max(prev - 0.5, 1))}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "#fff",
+                      fontWeight: 800,
+                      cursor: "pointer",
+                    }}
+                  >
+                    −
+                  </button>
+                  <div
+                    style={{
+                      fontSize: "0.6rem",
+                      color: "#fff",
+                      fontWeight: 800,
+                    }}
+                  >
+                    {zoom.toFixed(1)}x
+                  </div>
                 </div>
 
                 <div

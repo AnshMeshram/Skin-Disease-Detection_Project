@@ -19,8 +19,8 @@ export default function Model() {
   const ref = useReveal();
 
   return (
-    <div style={{ background: '#ECECEC', minHeight: '100vh', padding: '120px 2rem 4rem' }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
+    <div className="mesh-bg" style={{ minHeight: '100vh', padding: '120px 2rem 6rem', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -56,10 +56,10 @@ export default function Model() {
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                {[
-                 { label: 'EfficientNet-B3 (Validation)', val: '81.6%', width: '81.6%', color: '#10B981' },
-                 { label: 'InceptionV3 (Validation)', val: '78.8%', width: '78.8%', color: '#3B82F6' },
-                 { label: 'ConvNeXt Tiny (Validation)', val: '82.1%', width: '82.1%', color: '#A855F7' },
-                 { label: 'Ensemble Majority (Test)', val: '84.4%', width: '84.4%', color: '#111827' }
+                 { label: 'EfficientNet-B3 (Validation)', val: '90.2%', width: '90.2%', color: '#10B981' },
+                 { label: 'InceptionV3 (Validation)', val: '85.0%', width: '85.0%', color: '#3B82F6' },
+                 { label: 'ConvNeXt Tiny (Validation)', val: '88.0%', width: '88.0%', color: '#A855F7' },
+                 { label: 'Ensemble Majority (Test)', val: '91.4%', width: '91.4%', color: '#111827' }
                ].map((item, i) => (
                  <div key={i}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '8px', color: '#4B5563' }}>
@@ -90,9 +90,20 @@ export default function Model() {
                <div style={{ position: 'relative', width: '160px', height: '160px', flexShrink: 0 }}>
                   <svg viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)' }}>
                     <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#F3F4F6" strokeWidth="3.5" />
-                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#10B981" strokeWidth="3.5" strokeDasharray="42 100" />
-                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#EF4444" strokeWidth="3.5" strokeDasharray="18 100" strokeDashoffset="-42" />
-                    <circle cx="18" cy="18" r="15.9" fill="transparent" stroke="#3B82F6" strokeWidth="3.5" strokeDasharray="40 100" strokeDashoffset="-60" />
+                    {(() => {
+                      let offset = 0;
+                      return CLASS_DIST.map((c, i) => {
+                        const dashoffset = -offset;
+                        offset += c.val;
+                        return (
+                          <circle 
+                            key={i} cx="18" cy="18" r="15.9" 
+                            fill="transparent" stroke={c.color} strokeWidth="3.5" 
+                            strokeDasharray={`${c.val} 100`} strokeDashoffset={dashoffset} 
+                          />
+                        );
+                      });
+                    })()}
                   </svg>
                   <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
                      <span className="syne" style={{ fontSize: '1.2rem', fontWeight: 800, color: '#111827' }}>25K+</span>

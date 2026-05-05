@@ -83,6 +83,16 @@ h3,
     width: 0;
   }
 }
+@keyframes meshGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes liquidMove {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.05) translate(-2%, -2%); }
+  100% { transform: scale(1) translate(0, 0); }
+}
 
 /* ── Scroll reveal ───────────────────────────────── */
 .reveal {
@@ -95,6 +105,24 @@ h3,
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.mesh-bg {
+  background: linear-gradient(-45deg, #f0f9ff, #dbeafe, #e0f2fe, #f0fdfa, #ffffff);
+  background-size: 400% 400%;
+  animation: meshGradient 10s ease-in-out infinite;
+}
+
+.liquid-bg {
+  background-color: #ffffff;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(217, 100%, 94%, 1) 0, transparent 50%), 
+    radial-gradient(at 50% 0%, hsla(200, 100%, 96%, 1) 0, transparent 50%), 
+    radial-gradient(at 100% 0%, hsla(217, 100%, 94%, 1) 0, transparent 50%),
+    radial-gradient(at 0% 50%, hsla(200, 100%, 98%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 50%, hsla(217, 100%, 98%, 1) 0, transparent 50%);
+  background-size: 200% 200%;
+  animation: liquidMove 15s ease-in-out infinite;
 }
 
 /* ── Utilities ───────────────────────────────────── */

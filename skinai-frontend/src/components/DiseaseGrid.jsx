@@ -1,4 +1,5 @@
 import { useReveal } from '../hooks/useReveal';
+import FloatingParticlesBackground from './FloatingParticlesBackground';
 
 const CLASSES = [
   { num: '01', name: 'Melanoma',                abbr: 'MEL'  },
@@ -15,8 +16,9 @@ const CLASSES = [
 export default function DiseaseGrid() {
   const ref = useReveal();
   return (
-    <section id="classes" className="reveal" ref={ref} style={{ background: '#ECECEC', padding: '4rem 2rem' }}>
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+    <section id="classes" className="reveal" ref={ref} style={{ background: '#ECECEC', padding: '4rem 2rem', position: 'relative', overflow: 'hidden' }}>
+      <FloatingParticlesBackground count={24} colors={['#3B82F6', '#60A5FA', '#2DD4BF', '#93C5FD']} opacity={0.15} speed={0.4} />
+      <div style={{ maxWidth: 900, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <span style={{ background: '#fff', border: '1px solid #d1d5db', borderRadius: 999, padding: '4px 14px', fontSize: '0.72rem', fontWeight: 500, color: '#374151', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>Classification</span>
           <h2 className="syne" style={{ fontSize: '1.75rem', fontWeight: 700, color: '#111827', marginTop: '0.6rem', marginBottom: '0.4rem' }}>9 Target Classes</h2>
@@ -29,6 +31,7 @@ export default function DiseaseGrid() {
               borderRadius: 12, padding: '1rem', position: 'relative', overflow: 'hidden',
               transition: 'all 0.2s ease', cursor: 'default',
               boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+              zIndex: 1
             }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = '#93C5FD'; e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 16px rgba(37,99,235,0.12)'; }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)'; }}

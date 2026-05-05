@@ -69,7 +69,7 @@ api:
   host: "0.0.0.0"
   port: 8080
 live:
-  fold: 0
+  fold: 4
   use_ensemble: false
   confidence_threshold: 0.70
   hair_removal: true

@@ -12,10 +12,7 @@ const TEAM = [
 export default function TeamSection() {
   const ref = useReveal();
   return (
-    <section id="students" className="reveal" ref={ref} style={{ background: '#f8fafc', padding: '6rem 2rem 8rem', position: 'relative', overflow: 'hidden' }}>
-      {/* Abstract Background Element */}
-      <div style={{ position: 'absolute', top: '-10%', right: '-5%', width: '400px', height: '400px', background: 'radial-gradient(circle, rgba(37,99,235,0.03) 0%, transparent 70%)', zIndex: 0 }} />
-      
+    <section id="students" className="reveal mesh-bg" ref={ref} style={{ padding: '6rem 2rem 8rem', position: 'relative', overflow: 'hidden' }}>
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <div style={{ 

@@ -71,10 +71,36 @@ export default function Research() {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             {[
-              { title: "ISIC 2019: Analysis of Skin Lesions", link: "https://arxiv.org/abs/1902.03368", year: "2019", journal: "arXiv Pre-print" },
-              { title: "EfficientNet: Rethinking Model Scaling for CNNs", link: "https://arxiv.org/abs/1905.11946", year: "2020", journal: "ICML" },
-              { title: "ConvNeXt: A ConvNet for the 2020s", link: "https://arxiv.org/abs/2201.03545", year: "2022", journal: "CVPR" },
-              { title: "Deep Learning for Melanoma Recognition", link: "https://www.nature.com/articles/nature21056", year: "2017", journal: "Nature" }
+              { 
+                title: "EFAM-Net: A Multi-Class Skin Lesion Classification Model Utilizing Enhanced Feature Fusion and Attention Mechanisms", 
+                link: "https://ieeexplore.ieee.org/document/10695064", 
+                year: "2024", 
+                journal: "IEEE Transactions on Instrumentation and Measurement" 
+              },
+              { 
+                title: "Multi-Class Skin Disease Classification Using Deep Learning and Transfer Learning", 
+                link: "https://ieeexplore.ieee.org/document/10734113", 
+                year: "2024", 
+                journal: "IEEE Xplore" 
+              },
+              { 
+                title: "Skin Cancer Classification Using Deep Learning: A Review", 
+                link: "https://ieeexplore.ieee.org/document/9121248", 
+                year: "2020", 
+                journal: "IEEE Access" 
+              },
+              { 
+                title: "Automatic Skin Lesion Analysis Toward Melanoma Detection: A Challenge at the 2017 ISBI", 
+                link: "https://ieeexplore.ieee.org/document/9007648", 
+                year: "2018", 
+                journal: "IEEE Journal of Biomedical and Health Informatics" 
+              },
+              { 
+                title: "Multi-class skin lesion classification with deep convolutional neural networks", 
+                link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC11351641/", 
+                year: "2024", 
+                journal: "Scientific Reports" 
+              }
             ].map((paper, i) => (
               <a key={i} href={paper.link} target="_blank" rel="noopener noreferrer" style={{ 
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center', 
@@ -97,8 +123,8 @@ export default function Research() {
         </div>
 
         {/* Links */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
-          <a href="https://github.com" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '4rem' }}>
+          <a href="https://github.com/AnshMeshram/Skin-Disease-Detection_Project" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <button style={{ 
               display: 'flex', alignItems: 'center', gap: '10px', 
               background: '#111827', color: '#fff', border: 'none', 

@@ -42,10 +42,16 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 className="syne" style={{ fontSize: '1rem', marginBottom: '1.25rem', color: '#F8FAFC' }}>Connect</h4>
-            <div style={{ display: 'flex', gap: '12px' }}>
-               <a href="#" style={{ color: '#E2E8F0' }}><Code size={20} /></a>
-               <a href="#" style={{ color: '#E2E8F0' }}><Mail size={20} /></a>
-               <a href="#" style={{ color: '#E2E8F0' }}><Globe size={20} /></a>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+               <div style={{ display: 'flex', gap: '16px' }}>
+                  <a href="https://github.com/AnshMeshram/Skin-Disease-Detection_Project" target="_blank" rel="noopener noreferrer" title="View Source Code" style={{ color: '#E2E8F0', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = '#E2E8F0'}><Code size={20} /></a>
+                  <a href="mailto:twacharakshak2026@gmail.com" title="Mail TwachaRakshak" style={{ color: '#E2E8F0', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = '#E2E8F0'}><Mail size={20} /></a>
+                  <a href="https://ieeexplore.ieee.org" target="_blank" rel="noopener noreferrer" title="Research Publications" style={{ color: '#E2E8F0', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = '#fff'} onMouseLeave={e => e.currentTarget.style.color = '#E2E8F0'}><Globe size={20} /></a>
+               </div>
+               <div style={{ fontSize: '0.8rem', color: '#94A3B8', lineHeight: '1.6' }}>
+                  Wellesely Rd, Shivajinagar,<br />
+                  Pune – 411 005. Maharashtra, INDIA.
+               </div>
             </div>
           </div>
 

@@ -1,3 +1,5 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useReveal } from '../hooks/useReveal';
 import FloatingParticlesBackground from './FloatingParticlesBackground';
 
@@ -15,8 +17,10 @@ const CLASSES = [
 
 export default function DiseaseGrid() {
   const ref = useReveal();
+  const navigate = useNavigate();
+
   return (
-    <section id="classes" className="reveal" ref={ref} style={{ background: '#ECECEC', padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
+    <section id="classes" className="reveal mesh-bg" ref={ref} style={{ padding: '8rem 2rem', position: 'relative', overflow: 'hidden' }}>
       <FloatingParticlesBackground count={24} colors={['#3B82F6', '#60A5FA', '#2DD4BF', '#93C5FD']} opacity={0.15} speed={0.4} />
       <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -24,12 +28,17 @@ export default function DiseaseGrid() {
           <h2 className="syne" style={{ fontSize: '2.5rem', fontWeight: 800, color: '#111827', marginTop: '1rem', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>9 Target Classes</h2>
           <p style={{ fontSize: '1rem', color: '#6b7280', maxWidth: 600, margin: '0 auto' }}>8 ISIC 2019 disease categories plus a healthy skin class.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
           {CLASSES.map((c, i) => (
-            <div key={c.abbr} style={{
+            <div key={c.abbr} 
+            onClick={() => {
+              const slug = c.name.toLowerCase().replace(/\s+/g, '-');
+              navigate(`/guide#${slug}`);
+            }}
+            style={{
               background: '#fff', border: '1px solid #e5e7eb',
               borderRadius: 20, padding: '2rem 1.5rem', position: 'relative', overflow: 'hidden',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'default',
+              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
               boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01)',
               zIndex: 1,
               display: 'flex',

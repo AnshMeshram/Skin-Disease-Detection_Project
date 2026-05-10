@@ -31,9 +31,15 @@ def _resolve_module(root: torch.nn.Module, path: str) -> torch.nn.Module:
 def get_target_layer(model_name: str, model) -> str:
     model_name = model_name.lower()
     if "efficientnet" in model_name:
+        # Check if it's our SkinEfficientNetB3 wrapper
+        if hasattr(model, "backbone"):
+            trunk = model.backbone
+            if hasattr(trunk, "blocks"): # Timm variant
+                return "backbone.blocks"
+            if hasattr(trunk, "features"): # Torchvision variant
+                return "backbone.features"
         return "backbone"
     if "inception" in model_name:
-        # In our wrapper, inception backbone lives under model.backbone.
         return "backbone.Mixed_7c"
     if "convnext" in model_name:
         return "backbone.features.7"
@@ -69,6 +75,7 @@ class GradCAM:
             self._bw = None
 
     def generate(self, input_tensor, class_idx=None) -> np.ndarray:
+        input_tensor.requires_grad = True
         self.model.zero_grad(set_to_none=True)
         logits = self.model(input_tensor)
 

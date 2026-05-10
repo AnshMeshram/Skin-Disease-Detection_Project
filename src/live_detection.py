@@ -52,8 +52,9 @@ class LiveDetector:
                 model_name = str(config.get("model", "efficientnet_b3"))
                 layer_name = get_target_layer(model_name, self.model)
                 self.gradcam = GradCAM(self.model, layer_name)
-            except Exception:
+            except Exception as e:
                 # Keep live mode running even if Grad-CAM hook setup fails.
+                print(f"GRADCAM SETUP ERROR: {e}")
                 self.gradcam = None
 
     def _prepare_input(self, frame_bgr: np.ndarray) -> torch.Tensor:
@@ -106,7 +107,8 @@ class LiveDetector:
                 rgb = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2RGB)
                 ov_rgb = self.gradcam.overlay(rgb, heat, alpha=self.gradcam_alpha)
                 gradcam_overlay_bgr = cv2.cvtColor(ov_rgb, cv2.COLOR_RGB2BGR)
-            except Exception:
+            except Exception as e:
+                print(f"GRADCAM ERROR: {e}")
                 gradcam_overlay_bgr = None
 
         return {

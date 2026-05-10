@@ -496,6 +496,7 @@ async def predict(file: UploadFile = File(...)):
             "probabilities": {k: float(v) for k, v in result["probabilities"].items()},
             "preprocessing_applied": True,
             "pipeline_images": pipeline_images,
+            "gradcam": _bgr_to_b64(result["gradcam_overlay_bgr"]) if result.get("gradcam_overlay_bgr") is not None else "",
         }
 
     except HTTPException:

@@ -80,8 +80,20 @@ const DISEASES = [
 export default function SkinGuide() {
   const ref = useReveal();
 
+  React.useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const id = hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, []);
   return (
-    <div style={{ background: '#ECECEC', minHeight: '100vh', padding: '100px 2rem 4rem' }}>
+    <div className="mesh-bg" style={{ minHeight: '100vh', padding: '100px 2rem 4rem' }}>
       <div style={{ maxWidth: 1000, margin: '0 auto' }}>
         
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -93,7 +105,7 @@ export default function SkinGuide() {
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
           {DISEASES.map((d, i) => (
-            <div key={i} className="reveal visible" style={{ 
+            <div key={i} id={d.name.toLowerCase().replace(/\s+/g, '-')} className="reveal visible" style={{ 
               background: '#fff', 
               borderRadius: '20px', 
               padding: '2rem', 
@@ -101,7 +113,8 @@ export default function SkinGuide() {
               boxShadow: '0 10px 15px -3px rgba(0,0,0,0.05)',
               display: 'flex',
               flexDirection: 'column',
-              gap: '1.5rem'
+              gap: '1.5rem',
+              scrollMarginTop: '120px'
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h2 className="syne" style={{ fontSize: '1.25rem', color: '#111827' }}>{d.name}</h2>

@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { RotateCcw, AlertTriangle, ShieldCheck, User } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { RotateCcw, AlertTriangle, ShieldCheck, User, ChevronDown } from "lucide-react";
 
 const DISEASE_INFO = {
   melanoma: { symptoms: "Patches, Itchy Skin, Fever", is_healthy: false },
@@ -49,6 +49,7 @@ export default function ResultsCard({
   patientInfo,
 }) {
   const [visible, setVisible] = useState(false);
+  const [showGradCAM, setShowGradCAM] = useState(false);
 
   useEffect(() => {
     if (result) setTimeout(() => setVisible(true), 60);
@@ -133,7 +134,7 @@ export default function ResultsCard({
   return (
     <section
       id="results"
-      style={{ background: "#F8FAFC", padding: "0 2rem 3rem" }}
+      style={{ background: "#F8FAFC", padding: "0 2rem 5rem" }}
     >
       <div style={{ maxWidth: 900, margin: "0 auto" }}>
         <div
@@ -358,6 +359,67 @@ export default function ResultsCard({
                   </div>
                 </div>
               </div>
+              {/* Grad-CAM Saliency Map (Explainability) - Now Collapsible */}
+              {result.gradcam && (
+                <div style={{ marginTop: '1.5rem' }}>
+                  <button 
+                    onClick={() => setShowGradCAM(!showGradCAM)}
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: '1.25rem',
+                      background: '#F9FAFB',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: showGradCAM ? '16px 16px 0 0' : '16px',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#EF4444', boxShadow: '0 0 8px rgba(239, 68, 68, 0.4)' }}></div>
+                      <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#374151', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                        AI Attention Map (Explainability)
+                      </span>
+                    </div>
+                    <ChevronDown 
+                      size={20} 
+                      style={{ 
+                        transform: showGradCAM ? 'rotate(180deg)' : 'rotate(0deg)', 
+                        transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                        color: '#9CA3AF'
+                      }} 
+                    />
+                  </button>
+
+                  <div style={{ 
+                    maxHeight: showGradCAM ? '1200px' : '0',
+                    opacity: showGradCAM ? 1 : 0,
+                    overflow: 'hidden',
+                    transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                    background: '#F9FAFB',
+                    border: '1px solid #E5E7EB',
+                    borderTop: 'none',
+                    borderRadius: '0 0 16px 16px',
+                    padding: showGradCAM ? '1.5rem' : '0 1.5rem'
+                  }}>
+                    <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+                      <img 
+                        src={`data:image/png;base64,${result.gradcam}`} 
+                        alt="Grad-CAM" 
+                        style={{ width: '100%', aspectRatio: '1', objectFit: 'cover' }} 
+                      />
+                      <div style={{ position: 'absolute', bottom: '12px', left: '12px', background: 'rgba(0,0,0,0.7)', color: '#fff', padding: '4px 12px', borderRadius: '6px', fontSize: '0.65rem', fontWeight: 600, backdropFilter: 'blur(8px)' }}>
+                        Focus Hotspots (Red)
+                      </div>
+                    </div>
+                    <p style={{ fontSize: '0.8rem', color: '#6B7280', marginTop: '1rem', lineHeight: '1.6' }}>
+                      The heatmap above highlights the specific visual features (textures, colors, or borders) the AI used to classify this lesion as <strong>{cap(finalPrediction)}</strong>.
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Right: Detailed Info */}
@@ -365,7 +427,7 @@ export default function ResultsCard({
               style={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "1.5rem",
+                gap: "2rem",
               }}
             >
               <div

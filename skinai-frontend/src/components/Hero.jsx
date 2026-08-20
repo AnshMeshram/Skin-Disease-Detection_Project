@@ -13,6 +13,7 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { validatePatientInfo } from "../schemas/patientSchema";
+import FloatingParticlesBackground from "./FloatingParticlesBackground";
 
 const MODEL_BADGES = [
   { name: "EfficientNet-B3", icon: "⚡" },
@@ -195,48 +196,224 @@ export default function Hero({
           gap: "1.25rem",
         }}
       >
-        {/* Clinical Badge */}
+        {/* ── 3D Glassmorphism Title Card ── */}
         <div
           style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            border: "1px solid rgba(37,99,235,0.2)",
-            background: "rgba(255,255,255,0.75)",
-            backdropFilter: "blur(12px)",
-            borderRadius: 999,
-            padding: "6px 16px",
-            fontSize: "0.75rem",
-            color: "#1E40AF",
-            fontWeight: 700,
-            letterSpacing: "0.03em",
+            position: "relative",
+            maxWidth: 680,
+            width: "100%",
           }}
         >
-          <span
+          {/* Ambient 3D Glow Orbs behind the card */}
+          <div
+            aria-hidden="true"
             style={{
-              background: "#2563EB",
-              color: "#fff",
-              borderRadius: 999,
-              width: 8,
-              height: 8,
-              display: "inline-block",
+              position: "absolute",
+              top: "-15%",
+              left: "-10%",
+              width: "120%",
+              height: "130%",
+              background:
+                "radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.22) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.18) 0%, transparent 55%), radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 60%)",
+              filter: "blur(24px)",
+              pointerEvents: "none",
+              zIndex: 0,
             }}
           />
-          CLINICAL DERMOSCOPY SYSTEM
-        </div>
 
-        <h1
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 800,
-            fontSize: "clamp(2.2rem, 6vw, 3.8rem)",
-            color: "#111827",
-            lineHeight: 1.15,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          Skin Lesion Assessment &amp; Diagnostic Guide
-        </h1>
+          {/* Main 3D Hyper-Realistic Frosted Glass Container */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 1,
+              background:
+                "linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.38) 45%, rgba(255, 255, 255, 0.62) 75%, rgba(255, 255, 255, 0.3) 100%)",
+              backdropFilter: "blur(40px) saturate(200%)",
+              WebkitBackdropFilter: "blur(40px) saturate(200%)",
+              border: "1.5px solid rgba(255, 255, 255, 0.85)",
+              borderRadius: "32px",
+              padding: "2.5rem 2.5rem 2.25rem",
+              boxShadow:
+                "0 35px 70px -15px rgba(15, 23, 42, 0.12), 0 20px 40px -10px rgba(37, 99, 235, 0.14), inset 0 2px 3px rgba(255, 255, 255, 0.98), inset 0 -2px 4px rgba(37, 99, 235, 0.12), inset 2px 0 3px rgba(255, 255, 255, 0.8), inset 0 0 28px rgba(255, 255, 255, 0.45)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "1.15rem",
+              overflow: "hidden",
+            }}
+          >
+            {/* 3D Diagonal Specular Glass Reflection Sheen */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "60%",
+                background:
+                  "linear-gradient(120deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.22) 35%, transparent 65%)",
+                borderRadius: "32px 32px 140px 32px",
+                pointerEvents: "none",
+                zIndex: 1,
+              }}
+            />
+
+            {/* 3D Floating Neural Micro-Particles */}
+            <FloatingParticlesBackground
+              count={16}
+              colors={["#2563EB", "#10B981", "#38BDF8", "#818CF8"]}
+              opacity={0.32}
+              speed={0.22}
+              variant="neural"
+              connectLines={true}
+              maxLineDistance={80}
+            />
+
+            {/* Specular 3D Light Reflection Beam */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                top: 0,
+                left: "8%",
+                right: "8%",
+                height: "2.5px",
+                background:
+                  "linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.6) 20%, rgba(255, 255, 255, 1) 50%, rgba(52, 211, 153, 0.6) 80%, transparent 100%)",
+                filter: "drop-shadow(0 0 6px rgba(255,255,255,0.9))",
+                zIndex: 2,
+              }}
+            />
+
+            {/* 3D Dot-Matrix & Micro-Grid Texture Overlay */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                inset: 0,
+                backgroundImage:
+                  "radial-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px), radial-gradient(rgba(16, 185, 129, 0.08) 1px, transparent 1px)",
+                backgroundSize: "20px 20px, 40px 40px",
+                backgroundPosition: "0 0, 10px 10px",
+                opacity: 0.65,
+                pointerEvents: "none",
+                maskImage:
+                  "radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%)",
+                WebkitMaskImage:
+                  "radial-gradient(ellipse 90% 80% at 50% 50%, black 40%, transparent 95%)",
+              }}
+            />
+
+            {/* Clinical Badge */}
+            <div
+              style={{
+                position: "relative",
+                zIndex: 2,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                border: "1px solid rgba(255, 255, 255, 0.9)",
+                background: "rgba(255, 255, 255, 0.75)",
+                backdropFilter: "blur(16px)",
+                borderRadius: 999,
+                padding: "6px 18px",
+                fontSize: "0.75rem",
+                color: "#1D4ED8",
+                fontWeight: 800,
+                letterSpacing: "0.06em",
+                boxShadow:
+                  "0 4px 14px rgba(37, 99, 235, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.95)",
+              }}
+            >
+              <span
+                style={{
+                  background: "#2563EB",
+                  color: "#fff",
+                  borderRadius: 999,
+                  width: 8,
+                  height: 8,
+                  display: "inline-block",
+                  boxShadow: "0 0 8px rgba(37, 99, 235, 0.7)",
+                }}
+              />
+              CLINICAL DERMOSCOPY AI SYSTEM
+            </div>
+
+            {/* Heading */}
+            <h1
+              className="syne"
+              style={{
+                position: "relative",
+                zIndex: 2,
+                fontWeight: 800,
+                fontSize: "clamp(2.25rem, 5vw, 3rem)",
+                color: "#111827",
+                lineHeight: 1.15,
+                letterSpacing: "-0.02em",
+                margin: 0,
+                textShadow: "0 1px 2px rgba(255,255,255,0.6)",
+              }}
+            >
+              Skin Lesion Assessment &amp; Diagnostic Guide
+            </h1>
+
+            {/* Subtitle */}
+            <p
+              style={{
+                position: "relative",
+                zIndex: 2,
+                fontSize: "0.9375rem",
+                color: "#4B5563",
+                lineHeight: 1.6,
+                maxWidth: "540px",
+                margin: 0,
+              }}
+            >
+              Multi-architecture neural ensemble (EfficientNet-B3, Inception-V3, ConvNeXt) for dermatoscopic assessment and automated lesion segmentation.
+            </p>
+
+            {/* 3D Depth Feature Pills */}
+            <div
+              style={{
+                position: "relative",
+                zIndex: 2,
+                display: "flex",
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: "8px",
+                marginTop: "0.25rem",
+              }}
+            >
+              {[
+                { icon: "⚡", label: "3D-CA Soft Attention" },
+                { icon: "🔬", label: "9 Diagnostic Classes" },
+                { icon: "🛡️", label: "ISIC 2019 Calibrated" },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    background: "rgba(255, 255, 255, 0.7)",
+                    backdropFilter: "blur(12px)",
+                    border: "1px solid rgba(255, 255, 255, 0.95)",
+                    padding: "5px 14px",
+                    borderRadius: "999px",
+                    fontSize: "0.72rem",
+                    fontWeight: 700,
+                    color: "#374151",
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.04), inset 0 1px 1px #fff",
+                  }}
+                >
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
 
         {/* Camera/Dropzone Box */}
         <div style={{ width: "100%", maxWidth: 500, marginTop: "1rem" }}>
@@ -467,9 +644,10 @@ export default function Hero({
                       background: "#10B981",
                       color: "#fff",
                       border: "none",
-                      padding: "8px 18px",
-                      borderRadius: 10,
+                      padding: "10px 24px",
+                      borderRadius: 999,
                       fontWeight: 700,
+                      fontSize: "0.9375rem",
                       cursor: "pointer",
                       transition: "all 0.2s",
                     }}
@@ -482,16 +660,17 @@ export default function Hero({
                       background: "rgba(255,255,255,0.1)",
                       color: "#fff",
                       border: "1px solid rgba(255,255,255,0.2)",
-                      padding: "8px 18px",
-                      borderRadius: 10,
+                      padding: "10px 24px",
+                      borderRadius: 999,
                       fontWeight: 700,
+                      fontSize: "0.9375rem",
                       cursor: "pointer",
                     }}
                   >
                     Upload File
                   </button>
                 </div>
-                <p style={{ fontSize: "0.8rem", opacity: 0.5 }}>
+                <p style={{ fontSize: "0.8125rem", opacity: 0.5 }}>
                   Supported formats: JPG, PNG, DICOM
                 </p>
               </div>
@@ -742,10 +921,10 @@ export default function Hero({
               background: "#2563EB",
               color: "#fff",
               border: "none",
-              padding: "1rem 3rem",
+              padding: "14px 32px",
               borderRadius: 999,
               fontWeight: 700,
-              fontSize: "1rem",
+              fontSize: "0.9375rem",
               cursor: !file || loading ? "not-allowed" : "pointer",
               opacity: !file || loading ? 0.6 : 1,
               boxShadow: "0 10px 20px rgba(37, 99, 235, 0.3)",

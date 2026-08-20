@@ -5,12 +5,16 @@ import {
   ShieldCheck,
   User,
   Download,
+  FileText,
+  Printer,
   ChevronDown,
   ChevronUp,
   Layers,
   Activity,
   Stethoscope,
 } from "lucide-react";
+import ClinicalReportCard from "./ClinicalReportCard";
+import { generateDirectPDFReport } from "../utils/pdfExport";
 
 /* ── Clinical Details & Symptoms ────────────────────────────────────────── */
 const DISEASE_CLINICAL_DETAILS = {
@@ -163,6 +167,7 @@ export default function ResultsCard({
 }) {
   const [visible, setVisible] = useState(false);
   const [showGradCAM, setShowGradCAM] = useState(false);
+  const [showReportModal, setShowReportModal] = useState(false);
 
   useEffect(() => {
     if (result) setTimeout(() => setVisible(true), 60);
@@ -201,9 +206,33 @@ export default function ResultsCard({
     gradcamSrc = `data:image/png;base64,${gradcamSrc}`;
   }
 
+  const sortedProbs = [
+    { code: 'MEL', name: 'Melanoma', pct: (probabilities?.melanoma || probabilities?.mel || 0) * 100 },
+    { code: 'BCC', name: 'Basal Cell Carcinoma', pct: (probabilities?.basal_cell_carcinoma || probabilities?.bcc || 0) * 100 },
+    { code: 'NV', name: 'Melanocytic Nevi', pct: (probabilities?.nevus || probabilities?.nv || 0) * 100 },
+    { code: 'AKIEC', name: 'Actinic Keratoses', pct: (probabilities?.actinic_keratosis || probabilities?.akiec || 0) * 100 },
+    { code: 'BKL', name: 'Benign Keratosis', pct: (probabilities?.benign_keratosis || probabilities?.bkl || 0) * 100 },
+    { code: 'DF', name: 'Dermatofibroma', pct: (probabilities?.dermatofibroma || probabilities?.df || 0) * 100 },
+    { code: 'VASC', name: 'Vascular Lesions', pct: (probabilities?.vascular_lesion || probabilities?.vasc || 0) * 100 },
+    { code: 'SCC', name: 'Squamous Cell Carcinoma', pct: (probabilities?.squamous_cell_carcinoma || probabilities?.scc || 0) * 100 },
+    { code: 'HEALTHY', name: 'Healthy Skin', pct: (probabilities?.healthy || probabilities?.normal || 0) * 100 },
+  ].sort((a, b) => b.pct - a.pct);
+
+  const handleDirectDownload = () => {
+    generateDirectPDFReport({
+      patientInfo,
+      details,
+      finalConfidence,
+      isHealthy,
+      sortedProbs,
+      imageUrl,
+      gradcamSrc,
+    });
+  };
+
   return (
-    <section id="results" style={{ background: "#F8FAFC", padding: "1rem 2rem 5rem" }}>
-      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+    <section id="results" style={{ background: "transparent", padding: "1rem 2rem 5rem" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <div
           style={{
             background: "#fff",
@@ -254,25 +283,26 @@ export default function ResultsCard({
                 >
                   CLINICAL ANALYSIS OUTPUT
                 </span>
-                <h1
+                <h2
                   className="syne"
                   style={{
                     fontSize: "1.75rem",
                     color: "#111827",
                     margin: 0,
                     fontWeight: 800,
-                    letterSpacing: "-0.02em",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   {isHealthy ? "Skin is Healthy & Normal" : "Potential Issue Detected"}
-                </h1>
+                </h2>
               </div>
             </div>
 
             {/* Top Action Buttons */}
-            <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+            <div style={{ display: "flex", gap: "10px", alignItems: "center", flexWrap: "wrap" }}>
+              {/* Direct 1-Click PDF Download */}
               <button
-                onClick={() => downloadDiagnosticReport(result, patientInfo, finalKey, finalConfidence)}
+                onClick={handleDirectDownload}
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -280,16 +310,38 @@ export default function ResultsCard({
                   background: "#2563EB",
                   border: "none",
                   borderRadius: "999px",
-                  padding: "10px 20px",
-                  fontSize: "0.85rem",
+                  padding: "10px 22px",
+                  fontSize: "0.9375rem",
                   fontWeight: 700,
                   color: "#fff",
                   cursor: "pointer",
                   boxShadow: "0 4px 14px rgba(37,99,235,0.25)",
                   transition: "all 0.2s ease",
                 }}
+                title="Directly download clinical PDF report to your computer"
               >
-                <Download size={15} /> Download Report (.txt)
+                <Download size={16} /> Download PDF
+              </button>
+
+              {/* View Interactive Card Modal */}
+              <button
+                onClick={() => setShowReportModal(true)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  background: "#EFF6FF",
+                  border: "1px solid #BFDBFE",
+                  borderRadius: "999px",
+                  padding: "10px 20px",
+                  fontSize: "0.9375rem",
+                  fontWeight: 600,
+                  color: "#2563EB",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                <FileText size={15} /> View Report Card
               </button>
 
               <button
@@ -299,10 +351,10 @@ export default function ResultsCard({
                   alignItems: "center",
                   gap: 8,
                   background: "#F3F4F6",
-                  border: "none",
+                  border: "1px solid #E5E7EB",
                   borderRadius: "999px",
                   padding: "10px 20px",
-                  fontSize: "0.85rem",
+                  fontSize: "0.9375rem",
                   fontWeight: 600,
                   color: "#4B5563",
                   cursor: "pointer",
@@ -491,11 +543,11 @@ export default function ResultsCard({
                 <h2
                   className="syne"
                   style={{
-                    fontSize: "2.2rem",
+                    fontSize: "1.75rem",
                     color: "#111827",
                     margin: "0.2rem 0 1rem",
                     fontWeight: 800,
-                    letterSpacing: "-0.02em",
+                    letterSpacing: "-0.01em",
                   }}
                 >
                   {details.fullName}
@@ -692,6 +744,18 @@ export default function ResultsCard({
 
         </div>
       </div>
+
+      {/* ── Interactive Clinical Report Card Modal & PDF Generator ── */}
+      <ClinicalReportCard
+        isOpen={showReportModal}
+        onClose={() => setShowReportModal(false)}
+        result={result}
+        imageUrl={imageUrl}
+        patientInfo={patientInfo}
+        details={details}
+        finalConfidence={finalConfidence}
+        isHealthy={isHealthy}
+      />
     </section>
   );
 }

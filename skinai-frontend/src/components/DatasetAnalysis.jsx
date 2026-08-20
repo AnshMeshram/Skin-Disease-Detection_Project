@@ -94,10 +94,10 @@ export default function DatasetAnalysis() {
             <Database size={24} />
           </div>
           <div>
-            <h2 className="syne" style={{ fontSize: '2rem', color: '#111827', margin: 0 }}>
+            <h2 className="syne" style={{ fontSize: '1.75rem', color: '#111827', margin: 0 }}>
               ISIC 2019 Curation &amp; Analytics
             </h2>
-            <p style={{ color: '#6B7280', fontSize: '0.95rem', margin: '4px 0 0' }}>
+            <p style={{ color: '#6B7280', fontSize: '0.8125rem', margin: '4px 0 0' }}>
               Dermatoscopic case distribution, anatomical mapping, and 5-fold cross validation benchmarks
             </p>
           </div>
@@ -111,10 +111,10 @@ export default function DatasetAnalysis() {
             { label: 'VALIDATION SCHEMA', value: '5-Fold CV', sub: 'Stratified Cross-Val' },
             { label: 'ENSEMBLE AUC SCORE', value: '95.48%', sub: 'Weighted Consensus' }
           ].map((stat, i) => (
-            <div key={i} style={{ background: '#fff', padding: '1.25rem', borderRadius: '16px', border: '1px solid #E5E7EB', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+            <div key={i} style={{ background: '#fff', padding: '1.25rem', borderRadius: '16px', border: '1px solid #E5E7EB', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
               <span style={{ fontSize: '0.65rem', fontWeight: 800, color: '#64748B', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{stat.label}</span>
               <div className="syne" style={{ fontSize: '1.6rem', fontWeight: 800, color: '#2563EB', margin: '4px 0 2px' }}>{stat.value}</div>
-              <span style={{ fontSize: '0.72rem', color: '#94A3B8', fontWeight: 600 }}>{stat.sub}</span>
+              <span style={{ fontSize: '0.75rem', color: '#9CA3AF', fontWeight: 600 }}>{stat.sub}</span>
             </div>
           ))}
         </div>
@@ -124,10 +124,10 @@ export default function DatasetAnalysis() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
         
         {/* Donut Chart - Regional Distribution */}
-        <div style={{ background: '#fff', padding: '2rem', borderRadius: '24px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+        <div style={{ background: '#fff', padding: '2rem', borderRadius: '20px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.75rem' }}>
             <PieChart size={20} color="#2563EB" />
-            <h3 className="syne" style={{ fontSize: '1.2rem', margin: 0 }}>Anatomical Site Proportions</h3>
+            <h3 className="syne" style={{ fontSize: '1.25rem', margin: 0 }}>Anatomical Site Proportions</h3>
           </div>
           
           <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>

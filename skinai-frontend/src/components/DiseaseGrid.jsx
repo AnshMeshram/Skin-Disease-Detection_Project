@@ -20,15 +20,15 @@ export default function DiseaseGrid() {
   const navigate = useNavigate();
 
   return (
-    <section id="classes" className="reveal mesh-bg" ref={ref} style={{ padding: '8rem 2rem', position: 'relative', overflow: 'hidden' }}>
-      <FloatingParticlesBackground count={24} colors={['#3B82F6', '#60A5FA', '#2DD4BF', '#93C5FD']} opacity={0.15} speed={0.4} />
-      <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+    <section id="classes" className="reveal mesh-bg" ref={ref} style={{ padding: '6rem 2rem', position: 'relative', overflow: 'hidden' }}>
+      <FloatingParticlesBackground variant="bubbles" count={28} colors={['#2563EB', '#38BDF8', '#10B981', '#6366F1', '#EC4899']} opacity={0.35} speed={0.4} />
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <span style={{ background: '#fff', border: '1px solid #d1d5db', borderRadius: 999, padding: '4px 14px', fontSize: '0.72rem', fontWeight: 500, color: '#374151', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' }}>Classification</span>
-          <h2 className="syne" style={{ fontSize: '2.5rem', fontWeight: 800, color: '#111827', marginTop: '1rem', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>9 Target Classes</h2>
-          <p style={{ fontSize: '1rem', color: '#6b7280', maxWidth: 600, margin: '0 auto' }}>8 ISIC 2019 disease categories plus a healthy skin class.</p>
+          <span style={{ background: '#fff', border: '1px solid #E5E7EB', borderRadius: 999, padding: '4px 14px', fontSize: '0.75rem', fontWeight: 500, color: '#4B5563', boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>Classification</span>
+          <h2 className="syne" style={{ fontSize: '1.75rem', fontWeight: 800, color: '#111827', marginTop: '1rem', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>9 Target Classes</h2>
+          <p style={{ fontSize: '0.9375rem', color: '#6B7280', maxWidth: 600, margin: '0 auto' }}>8 ISIC 2019 disease categories plus a healthy skin class.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
           {CLASSES.map((c, i) => (
             <div key={c.abbr} 
             onClick={() => {
@@ -36,24 +36,24 @@ export default function DiseaseGrid() {
               navigate(`/guide#${slug}`);
             }}
             style={{
-              background: '#fff', border: '1px solid #e5e7eb',
+              background: '#fff', border: '1px solid #E5E7EB',
               borderRadius: 20, padding: '2rem 1.5rem', position: 'relative', overflow: 'hidden',
               transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)', cursor: 'pointer',
-              boxShadow: '0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01)',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
               zIndex: 1,
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               minHeight: 140
             }}
-            onMouseEnter={e => { e.currentTarget.style.borderColor = '#3B82F6'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(59,130,246,0.1), 0 10px 10px -5px rgba(59,130,246,0.04)'; }}
-            onMouseLeave={e => { e.currentTarget.style.borderColor = '#e5e7eb'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.02), 0 2px 4px -1px rgba(0,0,0,0.01)'; }}
+            onMouseEnter={e => { e.currentTarget.style.borderColor = '#2563EB'; e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 10px 40px rgba(37,99,235,0.1)'; }}
+            onMouseLeave={e => { e.currentTarget.style.borderColor = '#E5E7EB'; e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.04)'; }}
             >
               {/* Faded number */}
               <div className="syne" style={{ fontSize: '4rem', fontWeight: 900, color: 'rgba(37,99,235,0.06)', position: 'absolute', top: 10, right: 15, lineHeight: 1, userSelect: 'none', transition: 'all 0.3s' }}>{c.num}</div>
-              <div className="syne" style={{ fontSize: '1.1rem', fontWeight: 700, color: '#111827', marginBottom: 12, position: 'relative', zIndex: 2 }}>{c.name}</div>
+              <div className="syne" style={{ fontSize: '1.0625rem', fontWeight: 700, color: '#111827', marginBottom: 12, position: 'relative', zIndex: 2 }}>{c.name}</div>
               <div style={{ position: 'relative', zIndex: 2 }}>
-                <span style={{ background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE', borderRadius: 999, padding: '4px 14px', fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.05em' }}>{c.abbr}</span>
+                <span style={{ background: '#EFF6FF', color: '#2563EB', border: '1px solid #BFDBFE', borderRadius: 999, padding: '4px 14px', fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.05em' }}>{c.abbr}</span>
               </div>
             </div>
           ))}

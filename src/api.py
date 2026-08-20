@@ -506,3 +506,28 @@ async def predict(file: UploadFile = File(...)):
         raise HTTPException(status_code=400, detail="Invalid image file")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {e}")
+
+
+@app.post("/generate_pdf")
+async def generate_pdf_endpoint(payload: dict):
+    """
+    Generates and streams an official vector A4 Clinical Diagnostic Report PDF.
+    """
+    try:
+        from src.pdf_generator import generate_clinical_pdf
+        from fastapi import Response
+
+        pdf_bytes = generate_clinical_pdf(payload)
+        report_id = payload.get("report_id", "TR-AI-REPORT")
+
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f'attachment; filename="Clinical_Report_{report_id}.pdf"',
+                "Access-Control-Expose-Headers": "Content-Disposition",
+            }
+        )
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"PDF generation failed: {exc}")
+

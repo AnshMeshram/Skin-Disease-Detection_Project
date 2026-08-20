@@ -28,3 +28,14 @@ export async function getMetrics(model = null, fold = null) {
   if (!res.ok) throw new Error("Metrics unavailable");
   return res.json();
 }
+
+export async function generateReportPdf(payload) {
+  const res = await fetch(`${BASE}/generate_pdf`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error("PDF generation failed on server");
+  return res.blob();
+}
+

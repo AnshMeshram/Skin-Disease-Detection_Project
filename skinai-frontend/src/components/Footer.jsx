@@ -23,7 +23,7 @@ export default function Footer() {
                 Twacha<span style={{ color: '#10B981' }}>Rakshak</span>
               </div>
             </div>
-            <p style={{ fontSize: '0.9rem', color: '#E2E8F0', lineHeight: '1.7', maxWidth: '340px' }}>
+            <p style={{ fontSize: '0.9375rem', color: '#E2E8F0', lineHeight: '1.65', maxWidth: '340px' }}>
               Advanced dermatological AI diagnostic support system using multi-model ensemble architectures and 3D-CA attention mechanisms.
             </p>
           </div>
@@ -32,10 +32,10 @@ export default function Footer() {
           <div>
             <h4 className="syne" style={{ fontSize: '1rem', marginBottom: '1.25rem', color: '#F8FAFC' }}>Navigation</h4>
             <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <li><Link to="/" style={{ color: '#E2E8F0', fontSize: '0.85rem', textDecoration: 'none' }}>Home / Detection</Link></li>
-              <li><Link to="/guide" style={{ color: '#E2E8F0', fontSize: '0.85rem', textDecoration: 'none' }}>Skin Disease Guide</Link></li>
-              <li><Link to="/model" style={{ color: '#E2E8F0', fontSize: '0.85rem', textDecoration: 'none' }}>Model Benchmarks</Link></li>
-              <li><Link to="/research" style={{ color: '#E2E8F0', fontSize: '0.85rem', textDecoration: 'none' }}>Research Paper</Link></li>
+              <li><Link to="/" style={{ color: '#E2E8F0', fontSize: '0.8125rem', textDecoration: 'none' }}>Home / Detection</Link></li>
+              <li><Link to="/guide" style={{ color: '#E2E8F0', fontSize: '0.8125rem', textDecoration: 'none' }}>Skin Disease Guide</Link></li>
+              <li><Link to="/model" style={{ color: '#E2E8F0', fontSize: '0.8125rem', textDecoration: 'none' }}>Model Benchmarks</Link></li>
+              <li><Link to="/research" style={{ color: '#E2E8F0', fontSize: '0.8125rem', textDecoration: 'none' }}>Research Paper</Link></li>
             </ul>
           </div>
 

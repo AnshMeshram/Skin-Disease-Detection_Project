@@ -74,8 +74,8 @@ export default function Home({ apiOnline }) {
       />
       
       {error && (
-        <div style={{ maxWidth: 900, margin: '1rem auto', padding: '0 2rem' }}>
-          <div style={{ background: '#FEF2F2', border: '1px solid #FCA5A5', color: '#B91C1C', padding: '1rem', borderRadius: '12px', fontSize: '0.9rem' }}>
+        <div style={{ maxWidth: 1100, margin: '1rem auto', padding: '0 2rem' }}>
+          <div style={{ background: '#FEF2F2', border: '1px solid #FCA5A5', color: '#B91C1C', padding: '1rem', borderRadius: '12px', fontSize: '0.9375rem' }}>
             {error}
           </div>
         </div>

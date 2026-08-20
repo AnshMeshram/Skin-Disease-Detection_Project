@@ -27,14 +27,14 @@ export default function Model() {
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#DBEAFE', color: '#1E40AF', padding: '6px 16px', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '1rem' }}>
              <Target size={14} /> BENCHMARK v2.1
           </div>
-          <h1 className="syne" style={{ fontSize: '3rem', color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Architecture Performance</h1>
-          <p style={{ color: '#4B5563', maxWidth: '640px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.6' }}>
+          <h1 className="syne" style={{ fontSize: 'clamp(2.25rem, 5vw, 3rem)', color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Architecture Performance</h1>
+          <p style={{ color: '#4B5563', maxWidth: '640px', margin: '0 auto', fontSize: '0.9375rem', lineHeight: '1.65' }}>
             A comparative analysis of our ensemble members. We leverage the unique inductive biases of CNNs and Transformer-inspired designs.
           </p>
         </div>
 
         {/* Comparison Table Section */}
-        <div className="reveal visible" ref={ref} style={{ marginBottom: '5rem' }}>
+        <div className="reveal visible" ref={ref} style={{ marginBottom: '3rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '2rem' }}>
             <div style={{ background: '#2563EB', color: '#fff', padding: '10px', borderRadius: '12px' }}>
                <TrendingUp size={24} />
@@ -48,7 +48,7 @@ export default function Model() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2.5rem' }}>
           
           {/* Training Progress Graph */}
-          <div style={{ background: '#fff', padding: '2rem', borderRadius: '24px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+          <div style={{ background: '#fff', padding: '2rem', borderRadius: '20px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '2rem' }}>
               <BarChart3 size={22} color="#2563EB" />
               <h3 className="syne" style={{ fontSize: '1.25rem' }}>Accuracy Convergence</h3>
@@ -73,13 +73,13 @@ export default function Model() {
                ))}
             </div>
             
-            <p style={{ marginTop: '2rem', fontSize: '0.8rem', color: '#9CA3AF', textAlign: 'center', fontStyle: 'italic' }}>
+            <p style={{ marginTop: '2rem', fontSize: '0.75rem', color: '#9CA3AF', textAlign: 'center', fontStyle: 'italic' }}>
               * Metrics based on 5-fold cross-validation on ISIC 2019 dataset
             </p>
           </div>
 
           {/* Class Distribution Pie-style Chart */}
-          <div style={{ background: '#fff', padding: '2rem', borderRadius: '24px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.03)' }}>
+          <div style={{ background: '#fff', padding: '2rem', borderRadius: '20px', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '2rem' }}>
               <PieChart size={22} color="#2563EB" />
               <h3 className="syne" style={{ fontSize: '1.25rem' }}>Dataset Distribution</h3>
@@ -133,13 +133,13 @@ export default function Model() {
         </div>
 
         {/* Methodology Card */}
-        <div style={{ marginTop: '4rem', background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)', borderRadius: '24px', padding: '2.5rem', color: '#fff', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', boxShadow: '0 20px 25px -5px rgba(37, 99, 235, 0.2)' }}>
+        <div style={{ marginTop: '3rem', background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)', borderRadius: '24px', padding: '2.5rem', color: '#fff', display: 'flex', flexWrap: 'wrap', gap: '1.5rem', alignItems: 'center', boxShadow: '0 20px 40px rgba(37, 99, 235, 0.2)' }}>
           <div style={{ background: 'rgba(255,255,255,0.15)', padding: '1.25rem', borderRadius: '20px', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
              <Info size={36} />
           </div>
           <div style={{ flex: 1, minWidth: '250px' }}>
-            <h3 className="syne" style={{ fontSize: '1.35rem', marginBottom: '0.75rem', fontWeight: 700 }}>Training Protocol</h3>
-            <p style={{ fontSize: '0.95rem', opacity: 0.9, lineHeight: '1.7' }}>
+            <h3 className="syne" style={{ fontSize: '1.25rem', marginBottom: '0.75rem', fontWeight: 700 }}>Training Protocol</h3>
+            <p style={{ fontSize: '0.9375rem', opacity: 0.9, lineHeight: '1.65' }}>
               We employ a synchronized training loop across all ensemble members. Each model is initialized with ImageNet weights and fine-tuned using a tiered learning rate strategy. The final prediction is a weighted average of individual model logits, optimized via a validation-set grid search.
             </p>
           </div>

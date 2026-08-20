@@ -20,16 +20,16 @@ export default function Research() {
   }, []);
 
   const tabTriggerStyle = (active) => ({
-    padding: '0.85rem 1.75rem',
-    fontSize: '0.95rem',
+    padding: '10px 24px',
+    fontSize: '0.9375rem',
     fontWeight: 700,
     color: active ? '#fff' : '#4B5563',
     background: active ? '#2563EB' : 'rgba(255, 255, 255, 0.8)',
     border: active ? '1px solid #2563EB' : '1px solid rgba(0,0,0,0.06)',
-    borderRadius: '14px',
+    borderRadius: '12px',
     cursor: 'pointer',
     transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: active ? '0 8px 20px rgba(37,99,235,0.25)' : '0 2px 4px rgba(0,0,0,0.02)',
+    boxShadow: active ? '0 8px 20px rgba(37,99,235,0.25)' : '0 2px 8px rgba(0,0,0,0.04)',
     display: 'flex',
     alignItems: 'center',
     gap: '8px',
@@ -37,15 +37,15 @@ export default function Research() {
 
   return (
     <div className="mesh-bg" style={{ minHeight: '100vh', padding: '120px 2rem 6rem', position: 'relative', overflow: 'hidden' }}>
-      <div style={{ maxWidth: 1000, margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto', position: 'relative', zIndex: 1 }}>
         
         {/* Title */}
         <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: 'rgba(37,99,235,0.08)', padding: '6px 16px', borderRadius: '999px', color: '#2563EB', fontSize: '0.75rem', fontWeight: 800, marginBottom: '1rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             <FlaskConical size={14} /> Scientific Foundation
           </div>
-          <h1 className="syne" style={{ fontSize: '3.5rem', color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.03em' }}>Technical Research</h1>
-          <p style={{ color: '#4B5563', maxWidth: '640px', margin: '0 auto', fontSize: '1.1rem', lineHeight: '1.6' }}>
+          <h1 className="syne" style={{ fontSize: 'clamp(2.25rem, 5vw, 3rem)', color: '#111827', marginBottom: '1.25rem', letterSpacing: '-0.02em' }}>Technical Research</h1>
+          <p style={{ color: '#4B5563', maxWidth: '640px', margin: '0 auto', fontSize: '0.9375rem', lineHeight: '1.65' }}>
             A comprehensive breakdown of the architectural optimizations, ISIC 2019 dataset distributions, and scientific papers powering TwachaRakshak.
           </p>
         </div>
@@ -86,14 +86,14 @@ export default function Research() {
 
           {/* Abstract Content */}
           <Tabs.Content value="abstract">
-            <div style={{ background: '#fff', borderRadius: '24px', padding: '3.5rem', border: '1px solid #E5E7EB', boxShadow: '0 10px 40px rgba(0,0,0,0.03)', animation: 'fadeUp 0.5s ease' }}>
+            <div style={{ background: '#fff', borderRadius: '24px', padding: '2.5rem', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.04)', animation: 'fadeUp 0.5s ease' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '2rem' }}>
                 <div style={{ background: '#2563EB', color: '#fff', padding: '12px', borderRadius: '15px' }}>
                   <FileText size={28} />
                 </div>
                 <h2 className="syne" style={{ fontSize: '1.75rem', color: '#111827' }}>Project Abstract</h2>
               </div>
-              <p style={{ color: '#4B5563', lineHeight: '1.8', fontSize: '1.15rem' }}>
+              <p style={{ color: '#4B5563', lineHeight: '1.65', fontSize: '0.9375rem' }}>
                 TwachaRakshak focuses on the automated detection and classification of skin diseases using multi-architecture deep learning ensembles. By leveraging advanced convolutional neural networks including EfficientNet-B3, InceptionV3, and ConvNeXt, we achieve high accuracy in identifying 9 distinct skin conditions. The integration of 3D soft-attention mechanisms allows the models to focus on critical dermatoscopic patterns, significantly reducing false negatives in early-stage melanoma detection.
               </p>
               <div style={{ marginTop: '2.5rem', paddingTop: '2.5rem', borderTop: '1px solid #F3F4F6', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1.5rem' }}>
@@ -117,11 +117,11 @@ export default function Research() {
           <Tabs.Content value="dataset">
             <div style={{ animation: 'fadeUp 0.5s ease' }}>
               <DatasetAnalysis />
-              <div style={{ marginTop: '2.5rem', background: '#fff', padding: '2rem', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
+              <div style={{ marginTop: '2.5rem', background: '#fff', padding: '2rem', borderRadius: '20px', border: '1px solid #E5E7EB' }}>
                 <h3 className="syne" style={{ fontSize: '1.25rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <Database size={20} color="#2563EB" /> Dataset Curation
                 </h3>
-                <p style={{ color: '#6B7280', fontSize: '0.95rem', lineHeight: '1.7' }}>
+                <p style={{ color: '#6B7280', fontSize: '0.8125rem', lineHeight: '1.65' }}>
                   Utilizing the ISIC 2019 archive containing over 25,000 dermatoscopic images across 8 diagnostic categories, augmented with a custom 9th "Healthy Skin" class. The data underwent rigorous cleaning, duplicate removal, and class-balancing using Focal Loss weighting.
                 </p>
               </div>
@@ -138,7 +138,7 @@ export default function Research() {
                   <div style={{ background: '#EFF6FF', color: '#2563EB', padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800 }}>
                     PIPELINE 01
                   </div>
-                  <h3 className="syne" style={{ fontSize: '1.4rem', color: '#0F172A', margin: 0 }}>
+                  <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', margin: 0 }}>
                     Dermoscopic Image Preprocessing &amp; Standardization
                   </h3>
                 </div>
@@ -184,7 +184,7 @@ export default function Research() {
                   <div style={{ background: '#FEF2F2', color: '#DC2626', padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800 }}>
                     PIPELINE 02
                   </div>
-                  <h3 className="syne" style={{ fontSize: '1.4rem', color: '#0F172A', margin: 0 }}>
+                  <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', margin: 0 }}>
                     Class Imbalance &amp; Loss Function Optimization
                   </h3>
                 </div>
@@ -230,7 +230,7 @@ export default function Research() {
                   <div style={{ background: '#F5F3FF', color: '#7C3AED', padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800 }}>
                     PIPELINE 03
                   </div>
-                  <h3 className="syne" style={{ fontSize: '1.4rem', color: '#0F172A', margin: 0 }}>
+                  <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', margin: 0 }}>
                     Model Architecture &amp; 3D Soft-Attention Units
                   </h3>
                 </div>
@@ -276,7 +276,7 @@ export default function Research() {
                   <div style={{ background: '#FFFBEB', color: '#D97706', padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800 }}>
                     PIPELINE 04
                   </div>
-                  <h3 className="syne" style={{ fontSize: '1.4rem', color: '#0F172A', margin: 0 }}>
+                  <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', margin: 0 }}>
                     Ensemble &amp; Inference Optimization Engineering
                   </h3>
                 </div>
@@ -322,7 +322,7 @@ export default function Research() {
                   <div style={{ background: '#ECFDF5', color: '#059669', padding: '8px 12px', borderRadius: '8px', fontSize: '0.75rem', fontWeight: 800 }}>
                     PIPELINE 05
                   </div>
-                  <h3 className="syne" style={{ fontSize: '1.4rem', color: '#0F172A', margin: 0 }}>
+                  <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', margin: 0 }}>
                     Clinical Explainability &amp; Safety Verification
                   </h3>
                 </div>
@@ -367,7 +367,7 @@ export default function Research() {
 
           {/* Papers Content */}
           <Tabs.Content value="papers">
-            <div style={{ background: '#fff', borderRadius: '24px', padding: '3rem', border: '1px solid #E5E7EB', boxShadow: '0 4px 30px rgba(0,0,0,0.03)', animation: 'fadeUp 0.5s ease' }}>
+            <div style={{ background: '#fff', borderRadius: '24px', padding: '2.5rem', border: '1px solid #E5E7EB', boxShadow: '0 4px 20px rgba(0,0,0,0.04)', animation: 'fadeUp 0.5s ease' }}>
               <h2 className="syne" style={{ fontSize: '1.75rem', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '15px' }}>
                 <FileText size={24} color="#2563EB" /> Academic References
               </h2>
@@ -387,8 +387,8 @@ export default function Research() {
                   onMouseLeave={e => { e.currentTarget.style.background = '#F9FAFB'; e.currentTarget.style.borderColor = '#F3F4F6'; }}
                   >
                     <div>
-                      <h4 style={{ color: '#111827', fontSize: '0.95rem', marginBottom: '4px', fontWeight: 700 }}>{paper.title}</h4>
-                      <p style={{ color: '#6B7280', fontSize: '0.8rem' }}>{paper.journal} • {paper.year}</p>
+                      <h4 style={{ color: '#111827', fontSize: '0.9375rem', marginBottom: '4px', fontWeight: 700 }}>{paper.title}</h4>
+                      <p style={{ color: '#6B7280', fontSize: '0.8125rem' }}>{paper.journal} • {paper.year}</p>
                     </div>
                     <ExternalLink size={18} color="#2563EB" />
                   </a>
@@ -399,12 +399,12 @@ export default function Research() {
         </Tabs.Root>
 
         {/* Bottom Actions */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', flexWrap: 'wrap', marginTop: '3rem' }}>
           <a href="https://github.com/AnshMeshram/Skin-Disease-Detection_Project" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
             <button style={{ 
               display: 'flex', alignItems: 'center', gap: '10px', 
               background: '#111827', color: '#fff', border: 'none', 
-              padding: '1.25rem 2.5rem', borderRadius: '999px', fontSize: '1rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' 
+              padding: '14px 32px', borderRadius: '999px', fontSize: '0.9375rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' 
             }} onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}>
               <Code size={22} /> Explore Neural Source Code
             </button>

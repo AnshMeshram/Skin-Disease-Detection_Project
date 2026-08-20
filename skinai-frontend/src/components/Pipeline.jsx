@@ -19,8 +19,8 @@ function StepCard({ step, index, imgs, activeStep }) {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
       <div style={{
         width: 90, height: 90,
-        borderRadius: 10,
-        border: `2px solid ${active ? '#2563EB' : done ? '#10B981' : '#d1d5db'}`,
+        borderRadius: 12,
+        border: `2px solid ${active ? '#2563EB' : done ? '#10B981' : '#E5E7EB'}`,
         background: '#fff',
         overflow: 'hidden',
         display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -40,7 +40,7 @@ function StepCard({ step, index, imgs, activeStep }) {
           </div>
         )}
       </div>
-      <span style={{ fontSize: '0.72rem', fontWeight: 600, color: active ? '#2563EB' : done ? '#10B981' : '#374151', textAlign: 'center', fontFamily: 'Syne, sans-serif' }}>
+      <span style={{ fontSize: '0.75rem', fontWeight: 600, color: active ? '#2563EB' : done ? '#10B981' : '#4B5563', textAlign: 'center', fontFamily: 'Syne, sans-serif' }}>
         {step.label}
       </span>
     </div>
@@ -56,15 +56,15 @@ export default function Pipeline({ pipelineResult, activeStep, isVisible }) {
     <section id="preprocessing" className="reveal visible liquid-bg" ref={ref}
       style={{ padding: '6rem 2rem', animation: 'fadeUp 0.5s ease', position: 'relative', overflow: 'hidden' }}
     >
-      <div style={{ maxWidth: 900, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
           <span style={{
             background: activeStep >= 6 ? '#ECFDF5' : '#fff', 
-            border: `1px solid ${activeStep >= 6 ? '#10B981' : '#d1d5db'}`,
+            border: `1px solid ${activeStep >= 6 ? '#10B981' : '#E5E7EB'}`,
             borderRadius: 999, padding: '5px 18px',
-            fontSize: '0.78rem', fontWeight: 600, 
-            color: activeStep >= 6 ? '#10B981' : '#374151',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.06)',
+            fontSize: '0.75rem', fontWeight: 600, 
+            color: activeStep >= 6 ? '#10B981' : '#4B5563',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             display: 'flex', alignItems: 'center', gap: '8px',
             transition: 'all 0.3s ease'
           }}>
@@ -78,9 +78,9 @@ export default function Pipeline({ pipelineResult, activeStep, isVisible }) {
         </div>
 
         <div style={{
-          background: '#fff', border: '1px solid #e5e7eb',
-          borderRadius: 16, padding: '1.5rem 1.75rem',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+          background: '#fff', border: '1px solid #E5E7EB',
+          borderRadius: 20, padding: '1.5rem 1.75rem',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.04)',
         }}>
           <div style={{
             display: 'flex', alignItems: 'center',

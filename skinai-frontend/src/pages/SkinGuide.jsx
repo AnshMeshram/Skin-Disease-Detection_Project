@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useReveal } from '../hooks/useReveal';
-import { Info, AlertCircle, CheckCircle2, AlertTriangle, ArrowUpRight, Eye, Shield, ChevronRight, LayoutGrid, Rows3 } from 'lucide-react';
+import { Info, AlertCircle, CheckCircle2, AlertTriangle, ArrowUpRight, Eye, Shield, ChevronRight, LayoutGrid, Rows3, ExternalLink } from 'lucide-react';
 
 /* ── Disease Image Paths (public/diseases/) ──────── */
 const DISEASE_IMAGES = {
@@ -14,6 +14,49 @@ const DISEASE_IMAGES = {
   'Vascular Lesion': '/diseases/vascular_lesion.png',
   'Squamous Cell Carcinoma': '/diseases/scc.png',
   'Healthy Skin': '/diseases/healthy_skin.png',
+};
+
+/* ── Medical Reference Links ──────────────────── */
+const DISEASE_REFERENCES = {
+  'Melanoma': [
+    { label: 'Melanoma Overview — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/melanoma/symptoms-causes/syc-20374884' },
+    { label: 'Melanoma — DermNet NZ', url: 'https://dermnetnz.org/topics/melanoma' },
+    { label: 'Melanoma — American Academy of Dermatology', url: 'https://www.aad.org/public/diseases/skin-cancer/types/common/melanoma' },
+  ],
+  'Melanocytic Nevus': [
+    { label: 'Moles (Nevi) — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/moles/symptoms-causes/syc-20375200' },
+    { label: 'Melanocytic Naevus — DermNet NZ', url: 'https://dermnetnz.org/topics/melanocytic-naevus' },
+  ],
+  'Basal Cell Carcinoma': [
+    { label: 'Basal Cell Carcinoma — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/basal-cell-carcinoma/symptoms-causes/syc-20354187' },
+    { label: 'BCC — DermNet NZ', url: 'https://dermnetnz.org/topics/basal-cell-carcinoma' },
+    { label: 'BCC — Skin Cancer Foundation', url: 'https://www.skincancer.org/skin-cancer-information/basal-cell-carcinoma/' },
+  ],
+  'Actinic Keratosis': [
+    { label: 'Actinic Keratosis — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/actinic-keratosis/symptoms-causes/syc-20354969' },
+    { label: 'Actinic Keratosis — DermNet NZ', url: 'https://dermnetnz.org/topics/actinic-keratosis' },
+  ],
+  'Benign Keratosis': [
+    { label: 'Seborrheic Keratosis — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/seborrheic-keratosis/symptoms-causes/syc-20353878' },
+    { label: 'Seborrhoeic Keratosis — DermNet NZ', url: 'https://dermnetnz.org/topics/seborrhoeic-keratosis' },
+  ],
+  'Dermatofibroma': [
+    { label: 'Dermatofibroma — DermNet NZ', url: 'https://dermnetnz.org/topics/dermatofibroma' },
+    { label: 'Dermatofibroma — Cleveland Clinic', url: 'https://my.clevelandclinic.org/health/diseases/21803-dermatofibroma' },
+  ],
+  'Vascular Lesion': [
+    { label: 'Cherry Angioma — DermNet NZ', url: 'https://dermnetnz.org/topics/cherry-angioma' },
+    { label: 'Vascular Lesions — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/hemangioma/symptoms-causes/syc-20352334' },
+  ],
+  'Squamous Cell Carcinoma': [
+    { label: 'SCC — Mayo Clinic', url: 'https://www.mayoclinic.org/diseases-conditions/squamous-cell-carcinoma/symptoms-causes/syc-20352480' },
+    { label: 'SCC — DermNet NZ', url: 'https://dermnetnz.org/topics/squamous-cell-carcinoma' },
+    { label: 'SCC — Skin Cancer Foundation', url: 'https://www.skincancer.org/skin-cancer-information/squamous-cell-carcinoma/' },
+  ],
+  'Healthy Skin': [
+    { label: 'Skin Health — AAD', url: 'https://www.aad.org/public/everyday-care/skin-care-basics' },
+    { label: 'Sun Protection — Skin Cancer Foundation', url: 'https://www.skincancer.org/skin-cancer-prevention/' },
+  ],
 };
 
 /* ── Enhanced Disease Data ───────────────────────── */
@@ -367,64 +410,92 @@ export default function SkinGuide() {
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
 
         {/* ══════════════════════════════════════════ */}
-        {/* ── PAGE HEADER ────────────────────────── */}
+        {/* ── PAGE HEADER (CENTERED) ─────────────── */}
         {/* ══════════════════════════════════════════ */}
-        <div style={{ marginBottom: '3rem', position: 'relative' }}>
+        <div style={{ marginBottom: '3rem', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: '6px',
             background: '#ECFDF5', color: '#059669',
-            padding: '6px 14px', borderRadius: '999px',
-            fontSize: '0.72rem', fontWeight: 700,
-            marginBottom: '1rem', letterSpacing: '0.5px',
+            border: '1px solid #A7F3D0',
+            padding: '6px 16px', borderRadius: '999px',
+            fontSize: '0.75rem', fontWeight: 700,
+            marginBottom: '1.25rem', letterSpacing: '0.06em',
+            boxShadow: '0 2px 8px rgba(16, 185, 129, 0.08)',
           }}>
             🔬 THE CLINICAL LENS
           </span>
 
           <h1 className="syne" style={{
-            fontSize: 'clamp(2rem, 5vw, 3.2rem)',
+            fontSize: 'clamp(2.25rem, 5vw, 3.2rem)',
             color: '#111827', lineHeight: 1.15,
-            marginBottom: '1rem', maxWidth: '600px',
+            letterSpacing: '-0.02em',
+            marginBottom: '1rem',
+            maxWidth: '750px',
           }}>
-            Case Files &<br/>Observation Sheets
+            Case Files &amp; Observation Sheets
           </h1>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '1rem' }}>
-            <p style={{
-              color: '#6B7280', fontSize: '0.92rem', lineHeight: 1.6,
-              maxWidth: '550px',
-            }}>
-              Interactive clinical reference for high-fidelity dermatological identification.
-              Analyse textures, borders, and risk indicators across common morphologies.
-            </p>
-            {/* View mode toggle */}
-            <div style={{ display: 'flex', gap: '4px' }}>
-              <button
-                onClick={() => setViewMode('grid')}
-                style={{
-                  width: 36, height: 36, borderRadius: '10px',
-                  border: '1px solid #E5E7EB',
-                  background: viewMode === 'grid' ? '#111827' : '#fff',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', transition: 'all 0.2s ease',
-                }}
-                title="Grid View"
-              >
-                <LayoutGrid size={16} color={viewMode === 'grid' ? '#fff' : '#374151'} />
-              </button>
-              <button
-                onClick={() => setViewMode('case')}
-                style={{
-                  width: 36, height: 36, borderRadius: '10px',
-                  border: '1px solid #E5E7EB',
-                  background: viewMode === 'case' ? '#111827' : '#fff',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  cursor: 'pointer', transition: 'all 0.2s ease',
-                }}
-                title="Case Files View"
-              >
-                <Rows3 size={16} color={viewMode === 'case' ? '#fff' : '#374151'} />
-              </button>
-            </div>
+          <p style={{
+            color: '#4B5563', fontSize: '0.9375rem', lineHeight: 1.65,
+            maxWidth: '620px', margin: '0 auto 1.5rem',
+          }}>
+            Interactive clinical reference for high-fidelity dermatological identification.
+            Analyse textures, borders, and risk indicators across common pathologies.
+          </p>
+
+          {/* Centered View Mode Toggle Pill */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '6px',
+            background: 'rgba(255, 255, 255, 0.8)',
+            backdropFilter: 'blur(12px)',
+            padding: '4px 6px',
+            borderRadius: '14px',
+            border: '1px solid #E5E7EB',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.04)',
+          }}>
+            <button
+              onClick={() => setViewMode('case')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: 'none',
+                background: viewMode === 'case' ? '#111827' : 'transparent',
+                color: viewMode === 'case' ? '#fff' : '#4B5563',
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <Rows3 size={15} color={viewMode === 'case' ? '#fff' : '#6B7280'} />
+              <span>Case Files</span>
+            </button>
+
+            <button
+              onClick={() => setViewMode('grid')}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: 'none',
+                background: viewMode === 'grid' ? '#111827' : 'transparent',
+                color: viewMode === 'grid' ? '#fff' : '#4B5563',
+                fontSize: '0.8125rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+            >
+              <LayoutGrid size={15} color={viewMode === 'grid' ? '#fff' : '#6B7280'} />
+              <span>Grid View</span>
+            </button>
           </div>
         </div>
 
@@ -460,7 +531,7 @@ export default function SkinGuide() {
 
                   <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1rem', flex: 1 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <h2 className="syne" style={{ fontSize: '1.15rem', color: '#111827' }}>{d.name}</h2>
+                      <h2 className="syne" style={{ fontSize: '1.25rem', color: '#111827' }}>{d.name}</h2>
                       <span style={{
                         background: `${d.color}15`, color: d.color,
                         fontSize: '0.65rem', fontWeight: 700,
@@ -471,8 +542,8 @@ export default function SkinGuide() {
                     </div>
 
                     <div>
-                      <p style={{ fontWeight: 600, fontSize: '0.88rem', color: '#374151', marginBottom: '0.4rem' }}>{d.short}</p>
-                      <p style={{ fontSize: '0.82rem', color: '#6B7280', lineHeight: 1.6 }}>{d.details}</p>
+                      <p style={{ fontWeight: 600, fontSize: '0.9375rem', color: '#4B5563', marginBottom: '0.4rem' }}>{d.short}</p>
+                      <p style={{ fontSize: '0.8125rem', color: '#6B7280', lineHeight: 1.65 }}>{d.details}</p>
                     </div>
 
                     <div style={{ background: '#F9FAFB', borderRadius: '12px', padding: '1rem' }}>
@@ -540,10 +611,10 @@ export default function SkinGuide() {
                 <ArrowUpRight size={14} color="#9CA3AF" />
               </div>
             </div>
-            <h2 className="syne" style={{ fontSize: '1.75rem', color: '#111827', marginBottom: '0.75rem' }}>
+            <h2 className="syne" style={{ fontSize: '1.75rem', color: '#111827', marginBottom: '0.75rem', letterSpacing: '-0.01em' }}>
               {hero.name}
             </h2>
-            <p style={{ fontSize: '0.88rem', color: '#6B7280', lineHeight: 1.65, marginBottom: '1.5rem' }}>
+            <p style={{ fontSize: '0.9375rem', color: '#6B7280', lineHeight: 1.65, marginBottom: '1.5rem' }}>
               {hero.details}
             </p>
             <div style={{
@@ -617,7 +688,7 @@ export default function SkinGuide() {
         {/* ══════════════════════════════════════════ */}
         {/* ── PAIR 3: SCC + Healthy Skin ─────────── */}
         {/* ══════════════════════════════════════════ */}
-        <div className="case-pair-grid" style={{ marginBottom: '3.5rem' }}>
+        <div className="case-pair-grid" style={{ marginBottom: '2.5rem' }}>
           <div id="squamous-cell-carcinoma" style={{ scrollMarginTop: '120px' }}>
             <PairCard disease={DISEASES[7]} index={7} stagger={false} onSelect={setSelectedDisease} />
           </div>
@@ -635,10 +706,10 @@ export default function SkinGuide() {
           boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <h3 className="syne" style={{ fontSize: '1.35rem', color: '#111827', marginBottom: '0.5rem' }}>
+            <h3 className="syne" style={{ fontSize: '1.25rem', color: '#111827', marginBottom: '0.5rem' }}>
               Clinical Comparison View
             </h3>
-            <p style={{ color: '#9CA3AF', fontSize: '0.85rem' }}>
+            <p style={{ color: '#9CA3AF', fontSize: '0.8125rem' }}>
               Analyse subtle morphological differences side-by-side.
             </p>
           </div>
@@ -766,28 +837,32 @@ export default function SkinGuide() {
                 <span style={{ fontSize: '0.8rem', color: '#9CA3AF', fontWeight: 600 }}>ISIC Category</span>
               </div>
 
-              <h2 className="syne" style={{ fontSize: '1.8rem', color: '#111827', marginBottom: '0.5rem' }}>
+              <h2 className="syne" style={{ fontSize: '1.75rem', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.01em' }}>
                 {selectedDisease.name}
               </h2>
               <p style={{ color: '#4B5563', fontWeight: 600, fontSize: '0.95rem', marginBottom: '1.25rem' }}>
                 {selectedDisease.short}
               </p>
 
-              {/* Specimen preview */}
+              {/* Specimen preview — shows actual disease image */}
               <div style={{
-                background: selectedDisease.gradient,
-                borderRadius: '14px', height: 120, marginBottom: '1.25rem',
+                borderRadius: '12px', height: 140, marginBottom: '1.25rem',
                 position: 'relative', overflow: 'hidden',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
+                <img
+                  src={DISEASE_IMAGES[selectedDisease.name]}
+                  alt={`${selectedDisease.name} clinical reference`}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                />
                 <div style={{
                   position: 'absolute', inset: 0,
-                  background: `radial-gradient(circle at 40% 50%, ${selectedDisease.color}25, transparent 60%)`,
+                  background: 'linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.25) 100%)',
                 }} />
                 <span style={{
-                  fontSize: '0.7rem', fontWeight: 600, color: 'rgba(255,255,255,0.7)',
-                  background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)',
-                  padding: '5px 14px', borderRadius: '999px', zIndex: 1,
+                  position: 'absolute', bottom: '8px', left: '10px',
+                  fontSize: '0.6875rem', fontWeight: 600, color: 'rgba(255,255,255,0.85)',
+                  background: 'rgba(0,0,0,0.35)', backdropFilter: 'blur(8px)',
+                  padding: '4px 12px', borderRadius: '8px', zIndex: 1,
                   border: '1px solid rgba(255,255,255,0.1)',
                 }}>
                   Dermoscopic Specimen
@@ -845,15 +920,42 @@ export default function SkinGuide() {
                 border: `1px solid ${selectedDisease.color}30`,
                 borderRadius: '16px', padding: '1rem 1.25rem',
                 display: 'flex', alignItems: 'center', gap: '12px',
+                marginBottom: '1.5rem',
               }}>
                 <AlertCircle size={20} color={selectedDisease.color} />
-                <div style={{ fontSize: '0.8rem', color: '#1F2937' }}>
+                <div style={{ fontSize: '0.8125rem', color: '#111827' }}>
                   <strong>Recommendation:</strong>{' '}
                   {selectedDisease.risk === 'Critical' || selectedDisease.risk === 'High'
                     ? 'Schedule a dermatoscopy consultation promptly.'
                     : 'Monitor regularly and follow standard annual skin screening routines.'}
                 </div>
               </div>
+
+              {/* Medical Reference Links */}
+              {DISEASE_REFERENCES[selectedDisease.name] && (
+                <div style={{
+                  background: '#F9FAFB', borderRadius: '12px', padding: '1rem 1.25rem',
+                  border: '1px solid #E5E7EB',
+                }}>
+                  <h4 style={{ fontSize: '0.75rem', fontWeight: 700, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '0.75rem' }}>
+                    Medical References
+                  </h4>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    {DISEASE_REFERENCES[selectedDisease.name].map((ref, idx) => (
+                      <a
+                        key={idx}
+                        href={ref.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="ref-link"
+                      >
+                        <ExternalLink size={14} />
+                        {ref.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -871,12 +973,12 @@ export default function SkinGuide() {
           }}>
             <Info size={32} />
           </div>
-          <h2 className="syne" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>
+          <h2 className="syne" style={{ fontSize: '1.75rem', marginBottom: '1rem', letterSpacing: '-0.01em' }}>
             Always Consult a Professional
           </h2>
           <p style={{
             color: '#6B7280', maxWidth: '600px', margin: '0 auto',
-            fontSize: '0.95rem', lineHeight: '1.7',
+            fontSize: '0.9375rem', lineHeight: '1.65',
           }}>
             This guide is for informational purposes only. Skin disease identification requires
             professional clinical diagnosis. If you notice any suspicious changes in your skin,
